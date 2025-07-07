@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'Home/Home.css' %}">
+    <script src="https://kit.fontawesome.com/8104fe09a9.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="icon_container">
+            <a href=""><i class="fa-solid fa-user"></i></a>
+        </div>
+        <ul>
+            <a href=""><li class="options">Home</li></a>
+            <a href=""><li class="options">Quiz</li></a>
+            <a href=""><li class="options">Routines</li></a>
+            <a href=""><li class="options">Account</li></a>
+        </ul>
+    </header>
+    <section>
+        {% for product in products %}
+            <a href="">
+                <div class="product_container">
+                    <img class="product_image" src={{product.image_url}} alt="">
+                    <div class="product_name_container">
+                        <h4 class="product_name">{{product.name}}</h4>
+                    </div>
+                    <p class="product_price">{{product.price}} $</p>
+                </div>
+            </a>
+        {% endfor %}
+    </section>
+    <nav></nav>
+    
+</body>
+</html>
