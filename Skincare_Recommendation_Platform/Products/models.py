@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django import forms
 
 from Choices.models import IngredientsChoices, SkinTypeChoices, SkinConcernsChoices, PreferenceChoices, ProductCategoryChoices
 
@@ -10,14 +11,18 @@ class Product(models.Model):
     name = models.CharField(max_length= 255)
     brand = models.CharField(max_length= 255)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    rating = models.FloatField()
+    rating = models.FloatField(null=True, blank=True)
     category = models.CharField(max_length=30, choices=ProductCategoryChoices.choices)
     compatible_skin_types = ArrayField(
         models.CharField(max_length=30, choices=SkinTypeChoices.choices),
         default=list,
         blank=True
     )
-    concerns_targeted = models.CharField(max_length=30, choices=SkinConcernsChoices.choices)
+    concerns_targeted = ArrayField(
+        models.CharField(max_length=30, choices=SkinConcernsChoices.choices),
+        default=list,
+        blank=True          
+    )
     ingredients = ArrayField(
         models.CharField(max_length=30, choices=IngredientsChoices.choices),
         default=list,
@@ -27,5 +32,14 @@ class Product(models.Model):
     tags = ArrayField(
         models.CharField(max_length=50),
         default=list,
-        blank=True
+        blank=True,
+        null=True
     )
+
+# class ProductForm(forms.ModelForm):
+#     class Meta:
+#         model = Product
+#         fields = '__all__'
+#         widgets = {
+#             'ingredients': 
+#         }

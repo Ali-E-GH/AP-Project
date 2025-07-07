@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Routines',
     'Contexts',
     'Image_Analysis',
+    'Home',
 ]
 
 MIDDLEWARE = [
