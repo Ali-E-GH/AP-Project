@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'variables.css' %}">
+    <link rel="stylesheet" href="{% static 'Users/Signup.css' %%}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="signup_container">
+        <h2>Sign Up</h2>
+        <form method="post" action=".">
+            {% csrf_token %}
+            <input type="text" name="username" id="username_input" placeholder="Username" autocomplete="off">
+            <input type="password" name="password" id="password_input" placeholder="Password" autocomplete="off">
+            <input type="password" name="password_confirmation" placeholder="Repeat Password" autocomplete="off">
+            <div class="error_container">
+                {% if is_empty %}
+                    <p style="color: red;">
+                        No field can be empty
+                    </p>
+                {% elif not_match %}
+                    <p style="color: red;">
+                        Passwords don't match
+                    </p>
+                {% elif username_exists %}
+                    <p style="color: red;">
+                        Username already exists
+                    </p>
+                {% endif %}
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p> Already have an account? <a href="/user/login">Login</a></p>
+        {% if form.errors %}
+            <p style="color: red;">Invalid username or password.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

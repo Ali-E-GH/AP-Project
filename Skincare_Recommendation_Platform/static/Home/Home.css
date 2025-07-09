@@ -1,0 +1,137 @@
+/*{
+  box-sizing: border-box;
+} */
+
+body {
+  display: grid;
+  grid-template-areas: 
+    "header header"
+    "section nav";
+  grid-template-columns: 1fr 250px;
+  grid-template-rows: 80px 1fr;
+  height: 1500px;
+  background-color: var(--background);
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+header {
+  grid-area: header;
+  background-color: var(--background);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+}
+
+header ul {
+  display: flex;
+  justify-content: space-between;
+  height: inherit;
+  width: 350px;
+  align-items: center;
+  margin: 0;
+  padding-right: 15px;
+}
+
+header li {
+  list-style: none;
+  margin: 5px;
+  color: var(--primary);
+  font-size: 1.4em;
+}
+
+header li:hover {
+  color: var(--secondary);
+  border-bottom: 1px solid var(--border);
+  margin-top: 2px;
+}
+
+.icon_container {
+  width: 130px;
+  height: inherit;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+}
+i{
+  font-size: 50px;
+  color: var(--primary);
+}
+i:hover{
+  color: var(--secondary);
+  margin-bottom: 3px;
+}
+.username{
+    font-size: 1.4em;
+    color: var(--secondary);
+}
+
+section {
+  grid-area: section;
+  background-color: var(--surface);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 8px;
+}
+
+.product_container {
+  width: 200px;
+  height: 300px;
+  background-color: var(--background);
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  margin: 7px;
+}
+
+.product_container:hover {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
+}
+
+.product_image_container {
+  width: 200px;
+  height: 200px;
+  border-radius: 7px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.product_image {
+  width: inherit;
+  height: inherit;
+}
+
+.product_name {
+  color: var(--text);
+  font-family: inherit;
+  text-align: center;
+  font-size: 0.8em;
+}
+
+.product_price {
+  text-align: center;
+  font-family: inherit;
+  color: var(--text);
+}
+
+.product_name_container {
+  height: 30px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  grid-area: nav;
+  background-color: var(--background);
+  border-left: 1px solid var(--border);
+}

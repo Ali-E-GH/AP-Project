@@ -1,0 +1,83 @@
+*{
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+a{
+    text-decoration: none;
+    color: var(--primary);
+}
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--surface); 
+}
+.signup_container{
+    height: 600px;
+    width: 70%;
+    background-color: var(--background);
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    margin-top: 75px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20% 1fr 20%;
+    justify-content: center;
+    text-align: center;
+}
+form{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-top: 1%;
+}
+form input,form button{
+    width: 80%;
+    margin: 1%;
+    height: 17%;
+    border: none;
+}
+form button{
+    background-color: var(--primary);
+    border-radius: 5px;
+    width: 25%;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-on-primary);
+    padding-bottom: 3px;
+}
+form button:hover{
+    background-color: var(--secondary);
+    cursor: pointer;
+}
+form input{
+    border-radius: 5px;
+    background-color: var(--surface);
+    /* border-bottom: 1px solid var(--border) !important; */
+    padding-left: 10px;
+}
+form input:focus{
+    outline: none;
+    background-color: var(--clicked-surface) !important;
+}
+.error_container{
+    height: 80px;
+}
+form input:-webkit-autofill{
+    box-shadow: 0 0 0px 1000px var(--surface) inset !important;
+    -webkit-text-fill-color: var(--text) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+form input:-webkit-autofill:focus{
+    box-shadow: 0 0 0px 1000px var(--clicked-surface) inset !important;
+}
+.signup_container h2{
+    color: var(--primary);
+    font-size: 3em;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
