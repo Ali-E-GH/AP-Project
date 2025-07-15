@@ -8,14 +8,13 @@ body {
     "header header"
     "section nav";
   grid-template-columns: 1fr 250px;
-  grid-template-rows: 80px 1fr;
   height: 1500px;
   background-color: var(--background);
   margin: 0;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
-header {
+/* header {
   grid-area: header;
   background-color: var(--background);
   position: sticky;
@@ -69,7 +68,7 @@ i:hover{
 .username{
     font-size: 1.4em;
     color: var(--secondary);
-}
+} */
 
 section {
   grid-area: section;
@@ -82,24 +81,28 @@ section {
 
 .product_container {
   width: 200px;
-  height: 300px;
+  height: 320px;
   background-color: var(--background);
   border-radius: 5px;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
-  padding: 12px;
+  box-shadow: 0px 0px 10px 1px var(--shadow);
+  /* padding: 12px; */
   margin: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .product_container:hover {
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px 1px var(--shadow-focus);
 }
 
 .product_image_container {
   width: 200px;
   height: 200px;
   border-radius: 7px;
-  padding-bottom: 5px;
   text-align: center;
+  padding-top: 10px;
 }
 
 .product_image {
@@ -112,18 +115,20 @@ section {
   font-family: inherit;
   text-align: center;
   font-size: 0.8em;
+  padding-bottom: 5px;
 }
 
 .product_price {
   text-align: center;
   font-family: inherit;
   color: var(--text);
+  height: 20px;
 }
 
 .product_name_container {
-  height: 30px;
+  height: 60px;
   border-bottom: 1px solid var(--border);
-  padding-bottom: 5px;
+  width: 80%;
 }
 
 a {

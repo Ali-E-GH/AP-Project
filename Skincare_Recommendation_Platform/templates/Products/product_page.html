@@ -1,0 +1,88 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'variables.css' %}">
+<link rel="stylesheet" href="{% static 'Products/product_page.css' %}">
+<script src="{% static 'Products/product_page.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<section data-product_id="{{ product.id }}" id="section">
+    <div class="product_image_container">
+        <div class="image">
+            <img src="{% static product.image_url %}" alt="">
+        </div>
+        <div class="rating_container">
+            <form action="." method="post">
+                {% csrf_token %}
+                <i class="fa-solid fa-heart" id="like_button" data-liked="{{ liked }}"></i>
+            </form>
+            <div class="star_slider" id="star_slider">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+            </div>
+            <p class="product_rating">
+                {% if rating %}
+                    {{ rating }}
+                {% else %}
+                    -
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="product_info_container">
+        <div class="title_container">
+            <h2 class="title">{{ product.name }}</h2>
+        </div>
+        <div class="price_and_views_container">
+            <p class="price">${{ product.price }}</p>
+            <p class="views">{{ views }} views</p>
+        </div>
+        <div class="description_container">
+            <h3 class="description_title">Description</h3>
+            <p class="description">
+                {{ product.description }}
+            </p>
+            <h3 class="ingredients_title">Ingredients</h3>
+            <p class="ingredients">
+                {% for ingredient in ingredients %}
+                    {% if ingredient == last_ingredient %}
+                        {{ ingredient }}, etc.
+                    {% else %}
+                        {{ ingredient }},
+                    {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+        <div class="rate_container">
+            <form action="." method="post" class="rate_form">
+                {% csrf_token %}
+                <div class="input_and_stars">
+                    <input name="user_rating" type="number" min="0" max="10" step="0.1" placeholder="your rating" id="user_input">
+                    <div class="user_star_slider" id="user_star_slider">
+                        <span class="user_star" data-value="1">&#9733;</span>
+                        <span class="user_star" data-value="2">&#9733;</span>
+                        <span class="user_star" data-value="3">&#9733;</span>
+                        <span class="user_star" data-value="4">&#9733;</span>
+                        <span class="user_star" data-value="5">&#9733;</span>
+                    </div>
+                </div>
+                <button class="rate_button">
+                    Submit
+                </button>
+            </form>
+        </div>
+        <div class="button_container">
+            <button>
+                Add to cart
+            </button>
+        </div>
+    </div>
+    
+</section>
+
+{% endblock %}

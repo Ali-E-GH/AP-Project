@@ -1,0 +1,28 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'variables.css' %}">
+    <link rel="stylesheet" href="{% static 'Home/Home.css' %}">
+{% endblock %}
+
+{% block content %}
+<section>
+    {% for product in products %}
+        <a href="{% url 'product_page' product.id %}">
+            <div class="product_container">
+                <div class="product_image_container">
+                    <img class="product_image" src="{% static product.image_url %}" alt="loading failed">
+                </div>
+                <div class="product_name_container">
+                    <h4 class="product_name">{{ product.name }}</h4>
+                </div>
+                <p class="product_price">${{ product.price }}</p>
+            </div>
+        </a>
+    {% endfor %}
+</section>
+<nav></nav>
+{% endblock %}

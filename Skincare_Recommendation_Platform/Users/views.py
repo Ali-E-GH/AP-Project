@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
+from .models import UserProfile, Cart
+
 def SignupUser(request):
     is_empty = False
     not_match = False
@@ -29,11 +31,18 @@ def SignupUser(request):
         if not(is_empty or not_match or username_exists):
         
             user = User.objects.create_user(username=username, password=password)
+            UserProfile.objects.create(user=user)
+            Cart.objects.create(user=user)
+
             user.save()
             login(request, user)
             return redirect('home_page')
         else:
-            return render(request, 'Users/Signup.html', {'is_empty': is_empty, 'not_match': not_match, 'username_exists': username_exists})
+            return render(request, 'Users/Signup.html', {
+                'is_empty': is_empty,
+                'not_match': not_match,
+                'username_exists': username_exists
+                })
     else:
 
         return render(request, 'Users/Signup.html', {})

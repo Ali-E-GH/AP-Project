@@ -12,20 +12,24 @@
   --danger: #dc3545;
   --text-on-primary: #ffffff;
   --clicked-surface: #dfdbdb;
+  --shadow: rgba(0, 0, 0, 0.2);
+  --shadow-focus: rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode {
   --background: #121212;
   --surface: #1e1e1e;
-  --primary: #4dabf7;
-  --secondary: #adb5bd;
-  --text: #f8f9fa;
-  --text-muted: #ced4da;
+  --primary: #4a88ba;
+  --secondary: #9ba1a8;
+  --text: #cecfcf;
+  --text-muted: #adb3b9;
   --border: #2c2f33;
   --link: #66b2ff;
   --success: #51cf66;
   --warning: #ffd43b;
   --danger: #ff6b6b;
-  --text-on-primary: #ffffff;
+  --text-on-primary: #ffffffbd;
   --clicked-surface: #292929;
+  --shadow-focus: rgba(80, 80, 80, 0.7);
+  --shadow: rgba(80, 80, 80, 0.2);
 }

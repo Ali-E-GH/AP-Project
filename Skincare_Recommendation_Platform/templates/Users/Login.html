@@ -1,14 +1,17 @@
+{% extends 'header.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% block extra_head %}
     <link rel="stylesheet" href="{% static 'variables.css' %}">
     <link rel="stylesheet" href="{% static 'Users/Login.css' %}">
     <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+{% endblock %}
+{% block title %}
+    Login
+{% endblock %}
+{% block content %}
+    {% block header %}
+    {% endblock %}
     <div class="login_container">
         <h2>Login</h2>
         <form method="post" action=".">
@@ -33,5 +36,4 @@
             <p style="color: red;">Invalid username or password.</p>
         {% endif %}
     </div>
-</body>
-</html>
+{% endblock %}

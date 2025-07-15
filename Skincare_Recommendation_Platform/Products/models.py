@@ -11,8 +11,13 @@ class Product(models.Model):
     name = models.CharField(max_length= 255)
     brand = models.CharField(max_length= 255)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    rating = models.FloatField(null=True, blank=True)
     category = models.CharField(max_length=30, choices=ProductCategoryChoices.choices)
+    description = models.CharField(max_length=1000, blank=True, null=True)
+    ratings = ArrayField(
+        models.FloatField(),
+        default=list,
+        blank=True,
+    )
     compatible_skin_types = ArrayField(
         models.CharField(max_length=30, choices=SkinTypeChoices.choices),
         default=list,
@@ -28,7 +33,7 @@ class Product(models.Model):
         default=list,
         blank=True
     )
-    image_url = models.URLField(blank=True, null=True)
+    image_url = models.CharField(max_length=255, blank=True, null=True)
     tags = ArrayField(
         models.CharField(max_length=50),
         default=list,

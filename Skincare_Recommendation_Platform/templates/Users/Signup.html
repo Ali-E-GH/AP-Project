@@ -1,15 +1,19 @@
+{% extends 'header.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% block extra_head %}
     <link rel="stylesheet" href="{% static 'variables.css' %}">
     <link rel="stylesheet" href="{% static 'Users/Signup.css' %%}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% endblock %}
+{% block title %}
+    Signup
+{% endblock %}
+
+{% block content %}
+{% block header %}
+{% endblock %}
     <div class="signup_container">
         <h2>Sign Up</h2>
         <form method="post" action=".">
@@ -39,5 +43,4 @@
             <p style="color: red;">Invalid username or password.</p>
         {% endif %}
     </div>
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,114 @@
+*{
+  box-sizing: border-box;
+  transition: color 0.2s;
+}
+body{
+    display: grid;
+    grid-template-rows: 80px 1fr;
+    background-color: var(--background);
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+header {
+  grid-area: header;
+  background-color: var(--background);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header ul {
+  display: flex;
+  justify-content: space-between;
+  height: inherit;
+  width: 380px;
+  align-items: center;
+  margin: 0;
+  padding-right: 15px;
+}
+
+header li {
+  list-style: none;
+  margin: 5px;
+  color: var(--primary);
+  font-size: 1.4em;
+}
+
+header li:hover {
+  color: var(--secondary);
+  border-bottom: 1px solid var(--border);
+  margin-top: 2px;
+}
+
+.icon_container {
+  width: 150px;
+  height: inherit;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+}
+
+header i{
+  font-size: 35px;
+  color: var(--primary);
+}
+header .icon_container i:hover{
+  color: var(--secondary);
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+header form i:hover{
+  color: var(--secondary);
+  cursor: pointer;
+}
+.username{
+  font-size: 1.4em;
+  color: var(--secondary);
+}
+a{
+  text-decoration: none;
+}
+
+.search_bar_form{
+  margin-right: 15px;
+  width: 30%;
+}
+.search_bar_container{
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  width: 100%;
+}
+.search_bar{
+  width: 100%;
+  border: none;
+  background-color: var(--surface);
+  height: 45px;
+  border-radius: 7px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.1em;
+  color: var(--text);
+  padding-left: 10px;
+}
+.search_bar::placeholder{
+  color: var(--text-muted);
+}
+.search_bar:focus{
+  outline: none;
+  background-color: var(--clicked-surface) !important;
+}
+header form i{
+  font-size: 25px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
