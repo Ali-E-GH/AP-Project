@@ -16,6 +16,7 @@
         <h2>Login</h2>
         <form method="post" action=".">
             {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
             <input type="text" name="username" id="username_input" placeholder="Username" autocomplete="off">
             <input type="password" name="password" id="password_input" placeholder="Password" autocomplete="off">
             <div class="error_container">

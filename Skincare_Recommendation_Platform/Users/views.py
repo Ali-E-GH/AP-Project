@@ -6,8 +6,13 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
-from .models import UserProfile, Cart
+import json
+
+from Products.models import Product
+
+from .models import UserProfile, Cart, CartItem
 
 def SignupUser(request):
     is_empty = False
@@ -48,29 +53,55 @@ def SignupUser(request):
         return render(request, 'Users/Signup.html', {})
 
 
-def LoginUser (request):
+def LoginUser(request):
     is_empty = False
     is_wrong = False
-    if(request.method == "POST"):
+
+    if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
+        next_url = request.POST.get('next')  # Check POST first
 
-        if(username == '' or password == ''):
+        if username == '' or password == '':
             is_empty = True
-        user = authenticate(request , username = username , password = password)
-        if(user is not None):
+            return render(request, 'Users/Login.html', {'is_empty': is_empty, 'is_wrong': is_wrong, 'next': next_url})
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
             login(request, user)
-            messages.success(request, ("You have successfully logged in"))
+            if next_url:
+                return redirect(next_url)
             return redirect("home_page")
-        
         else:
             is_wrong = True
-            messages.success(request, ("error"))
-            return render(request, 'Users/Login.html', {'is_empty': is_empty, 'is_wrong': is_wrong})
+            return render(request, 'Users/Login.html', {'is_empty': is_empty, 'is_wrong': is_wrong, 'next': next_url})
+
     else:
-        return render(request, 'Users/Login.html', {})
+        next_url = request.GET.get('next')  # On GET, read next from query string
+        return render(request, 'Users/Login.html', {'next': next_url})
 
 
-def LogoutUser (request):
+def LogoutUser(request):
     logout(request)
     return redirect("home_page")
+
+
+def AddToCart(request):
+    if not(request.user.is_authenticated):
+        return JsonResponse({'redirect_url': '/user/login/'}, status=401)
+
+    data = json.loads(request.body)
+
+    product_id = data.get('product_id')
+    product = get_object_or_404(Product, id=product_id)
+
+    quantity = int(data.get('quantity'))
+
+    if(CartItem.objects.filter(cart=request.user.cart, product=product).exists()):
+        cart_item = get_object_or_404(CartItem, cart=request.user.cart, product=product)
+        cart_item.quantity += quantity
+        cart_item.save(update_fields=['quantity'])
+    else:
+        cart_item = CartItem.objects.create(cart=request.user.cart, product=product, quantity=quantity)
+
+    return JsonResponse({'success': True})

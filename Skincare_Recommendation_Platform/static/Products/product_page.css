@@ -180,9 +180,10 @@ img{
 }
 
 
-
-.product_info_container{
+product_info_container_container{
   grid-area: info;
+}
+.product_info_container{
   background-color: var(--surface);
   /* display: grid;
   grid-template-areas: 
@@ -199,6 +200,7 @@ img{
   margin-top: 40px;
   border-radius: 10px;
   padding-top: 20px;
+  padding-bottom: 50px;
 }
 .title_container{
   grid-area: title;
@@ -235,8 +237,11 @@ img{
   grid-area: button;
   width: 80%;
   margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.button_container button{
+.button_container #add_to_cart_button{
   background-color: var(--primary);
   border-radius: 10px;
   border: none;
@@ -249,9 +254,50 @@ img{
   color: var(--text-on-primary);
   transition: all 0.15s;
 }
-.button_container button:hover{
+.button_container #add_to_cart_button:hover{
   background-color: var(--secondary);
   cursor: pointer;
+}
+.quantity_container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.quantity_container button{
+  background-color: var(--secondary);
+  border-radius: 5px;
+  border: none;
+  height: 30px;
+  aspect-ratio: 1/1;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-on-primary);
+  transition: all 0.15s;
+  margin-bottom: 10px;
+}
+#increase_button:hover{
+  background-color: var(--success);
+  cursor: pointer;
+}
+#decrease_button:hover{
+  background-color: var(--danger);
+  cursor: pointer;
+}
+.quantity{
+  border-radius: 5px;
+  background-color: var(--background);
+  padding-left: 10px;
+  border: none;
+  width: 65%;
+  height: 30px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.quantity:focus{
+  outline: none;
+  background-color: var(--clicked-surface);
 }
 .rate_container{
   width: 100%;
@@ -279,6 +325,10 @@ img{
   width: 25%;
   height: 30px;
   color: var(--text-muted);
+}
+.rate_form input:focus{
+  outline: none;
+  background-color: var(--clicked-surface);
 }
 .rate_form button{
   background-color: var(--secondary);

@@ -15,8 +15,8 @@ def AddView(request):
         product_id = data.get('product_id')
 
         product = get_object_or_404(Product, id=product_id)
-
-        Browsing_History.objects.create(user=request.user, product=product, interaction_type='view')
+        if(request.user.is_authenticated):
+            Browsing_History.objects.create(user=request.user, product=product, interaction_type='view')
         return JsonResponse({'status': 'success'})
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
@@ -27,14 +27,15 @@ def ToggleLike(request):
         product_id = data.get('product_id')
         product = get_object_or_404(Product, id=product_id)
 
-        object_query = Browsing_History.objects.filter(user=request.user, product=product, interaction_type='like')
+        if(request.user.is_authenticated):
+            object_query = Browsing_History.objects.filter(user=request.user, product=product, interaction_type='like')
 
-        already_liked = object_query.exists()
+            already_liked = object_query.exists()
 
-        if(already_liked):
-            object_query.delete()
-        else:
-            Browsing_History.objects.create(user=request.user, product=product, interaction_type='like')
+            if(already_liked):
+                object_query.delete()
+            else:
+                Browsing_History.objects.create(user=request.user, product=product, interaction_type='like')
 
         return JsonResponse({'status': 'success'})
     return JsonResponse({'error': 'Invalid request'}, status=400)

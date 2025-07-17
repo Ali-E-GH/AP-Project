@@ -14,9 +14,11 @@ def ProductPage(request, id):
     ingredients = [ing.replace('_', ' ') for ing in list(product.ingredients)]
 
     # Browsing_History.objects.create(user=request.user, product=product, interaction_type='view')
-
-    object_query = Browsing_History.objects.filter(user=request.user, product=product, interaction_type='like')
-    already_liked = object_query.exists()
+    if(request.user.is_authenticated):
+        object_query = Browsing_History.objects.filter(user=request.user, product=product, interaction_type='like')
+        already_liked = object_query.exists()
+    else:
+        already_liked = False
 
     if(request.POST.get('user_rating')):
         product.ratings.append(float(request.POST.get('user_rating')))

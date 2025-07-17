@@ -111,6 +111,55 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('load', addView);
 
 
+    /* ----=== cart logics ===---- */
+
+    const quantity_input = document.getElementById('quantity');
+    const increase_button = document.getElementById('increase_button');
+    const decrease_button = document.getElementById('decrease_button');
+
+    increase_button.addEventListener('click', function() {
+        quantity_input.value = parseInt(quantity_input.value) + 1;
+    });
+
+    decrease_button.addEventListener('click', function() {
+        const new_value = parseInt(quantity_input.value) - 1;
+        if (new_value > 0) {
+            quantity_input.value = parseInt(new_value);
+        } else {
+            quantity_input.value = 1;
+        }
+    });
+
+    async function addToCart() {
+    const response = await fetch('/user/cart/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            product_id: document.getElementById('section').getAttribute('data-product_id'),
+            quantity: document.getElementById('quantity').value
+        }),
+    });
+
+    const data = await response.json();
+
+    if (data.redirect_url) {
+        const currentPage = window.location.pathname + window.location.search;
+        const url = new URL(data.redirect_url, window.location.origin);
+        url.searchParams.set('next', currentPage);
+
+        window.location.href = url.toString();
+
+
+    } 
+    //else if (data.success) {
+    //     alert('Added to cart!');
+    // }
+    }
+    const addToCartButton = document.getElementById('add_to_cart_button')
+    addToCartButton.addEventListener('click', addToCart)
 
     /* ----=== csrf handling ===---- */
     function getCookie(name) {
