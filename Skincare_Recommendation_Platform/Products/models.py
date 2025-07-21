@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django import forms
 
+from statistics import mean
+
 from Choices.models import IngredientsChoices, SkinTypeChoices, SkinConcernsChoices, PreferenceChoices, ProductCategoryChoices
 
 # Create your models here.
@@ -40,6 +42,9 @@ class Product(models.Model):
         blank=True,
         null=True
     )
+    @property
+    def rating(self):
+        return round(mean(self.ratings), 1)
 
 # class ProductForm(forms.ModelForm):
 #     class Meta:

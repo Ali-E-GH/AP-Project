@@ -6,10 +6,9 @@ body {
   display: grid;
   grid-template-areas: 
     "header header"
-    "section nav";
+    "section section";
   grid-template-columns: 1fr 250px;
   height: 1500px;
-  background-color: var(--background);
   margin: 0;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
@@ -98,6 +97,7 @@ section {
 }
 
 .product_image_container {
+  position: relative;
   width: 200px;
   height: 200px;
   border-radius: 7px;
@@ -139,4 +139,27 @@ nav {
   grid-area: nav;
   background-color: var(--background);
   border-left: 1px solid var(--border);
+}
+.price_and_rating{
+  width: 60%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  height: 50px;
+}
+.rating{
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  font-family: inherit;
+  color: var(--text);
+  height: 100%;
+}
+.star{
+  position: absolute;
+  color: gold;
+  font-size: 25px;
+  bottom: 23px;
+  left: 25px;
 }

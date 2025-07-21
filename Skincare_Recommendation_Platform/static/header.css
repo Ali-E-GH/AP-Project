@@ -3,11 +3,11 @@
   transition: color 0.2s;
 }
 body{
-    display: grid;
-    grid-template-rows: 80px 1fr;
-    background-color: var(--background);
-    margin: 0;
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  display: grid;
+  grid-template-rows: 80px 1fr;
+  background-color: var(--surface);
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
 header {
@@ -20,9 +20,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 0 0 15px 15px;
 }
 
-header ul {
+.nav_ul {
   display: flex;
   justify-content: space-between;
   height: inherit;
@@ -32,14 +33,14 @@ header ul {
   padding-right: 15px;
 }
 
-header li {
+.nav_options {
   list-style: none;
   margin: 5px;
   color: var(--primary);
   font-size: 1.4em;
 }
 
-header li:hover {
+.nav_options:hover {
   color: var(--secondary);
   border-bottom: 1px solid var(--border);
   margin-top: 2px;
@@ -47,7 +48,6 @@ header li:hover {
 
 .icon_container {
   width: 150px;
-  height: inherit;
   text-align: center;
   display: flex;
   align-items: center;
@@ -111,4 +111,44 @@ header form i{
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
+}
+.dropdown_user_menu{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menu_content{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 150px;
+  top: 57px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+}
+.menu_options{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100%;
+  text-decoration: none;
+  list-style: none;
+  color: var(--secondary);
+  border-bottom: 1px solid var(--border);
+  font-size: 1.1em;
+}
+.menu_options:hover{
+  background-color: var(--background);
+  color: var(--primary);
+}
+.fa-user.clicked{
+  color: var(--secondary);
+}
+.fa-user.clicked:hover{
+  cursor: pointer;
+  margin: 0;
 }

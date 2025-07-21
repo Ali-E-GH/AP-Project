@@ -19,10 +19,12 @@
                 <div class="product_name_container">
                     <h4 class="product_name">{{ product.name }}</h4>
                 </div>
-                <p class="product_price">${{ product.price }}</p>
+                <div class="price_and_rating">
+                    <p class="rating">{{ product.rating }} <span class="star">&#9733;</span></p>
+                    <p class="product_price">${{ product.price }}</p>
+                </div>
             </div>
         </a>
     {% endfor %}
 </section>
-<nav></nav>
 {% endblock %}
