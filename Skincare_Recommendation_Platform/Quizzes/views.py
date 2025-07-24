@@ -15,4 +15,5 @@ def QuizPage(request):
             answers[question.id] = answer # type: ignore
 
 
+
     return render(request, 'Quizzes/quiz_page.html', {'questions': questions})

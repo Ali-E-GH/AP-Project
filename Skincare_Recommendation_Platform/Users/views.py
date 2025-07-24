@@ -11,6 +11,7 @@ from django.http import JsonResponse
 import json
 
 from Products.models import Product
+from History.models import Browsing_History, Purchase_History
 
 from .models import UserProfile, Cart, CartItem
 
@@ -103,5 +104,49 @@ def AddToCart(request):
         cart_item.save(update_fields=['quantity'])
     else:
         cart_item = CartItem.objects.create(cart=request.user.cart, product=product, quantity=quantity)
+        Browsing_History.objects.create(user=request.user, product=product, interaction_type='cart')
+        
 
     return JsonResponse({'success': True})
+
+@login_required
+def CartPage(request):
+    cart = request.user.cart
+    cart_items = cart.items.all()
+    return render(request, 'Users/cart_page.html', {'items': cart_items, 'cart':cart})
+
+@login_required
+def AddAndRemove(request):
+    
+    data = json.loads(request.body)
+    item_id = data.get('id')
+    action = data.get('action')
+    cart = request.user.cart
+    cart_item = get_object_or_404(CartItem, id=item_id)
+
+    if(action == 'add'):
+        cart_item.quantity += 1
+        cart_item.save(update_fields=['quantity'])
+    if(action == 'remove'):
+        if(cart_item.quantity == 1):
+            cart_item.delete()
+            return JsonResponse({'status': 'deleted'})
+        else:
+            cart_item.quantity -= 1
+            cart_item.save(update_fields=['quantity'])
+
+    return JsonResponse({
+        'status':'success',
+        'total_cost': cart_item.total_cost,
+        'total_cart_cost': cart.total_cost,
+        'total_cart_quantity':cart.total_items
+        })
+
+@login_required
+def CompletePurchase(request):
+    cart = request.user.cart
+    cart_items = cart.items.all()
+    for item in cart_items:
+        Purchase_History.objects.create(user=request.user, product=item.product, quantity=item.quantity)
+        item.delete()
+    return JsonResponse({'status': 'success'})

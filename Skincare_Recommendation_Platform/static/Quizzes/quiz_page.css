@@ -53,7 +53,7 @@ form button{
     color: var(--text-on-primary);
     padding-bottom: 3px;
     transition: all 0.15s;
-    margin-top: 40px;
+    margin-top: 60px;
 }
 form button:hover{
     background-color: var(--secondary);
@@ -98,7 +98,8 @@ form input:-webkit-autofill:focus{
 }
 .options, .slider{
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: space-around;
     width: 100%;
 }
@@ -107,7 +108,8 @@ form input:-webkit-autofill:focus{
 }
   /* Hide the default checkbox */
 label{
-    width: 18%;
+    width: 15%;
+    min-width: 10%;
     background-color: var(--surface);
     color: var(--text);
     font-size: 1.1em;
@@ -115,8 +117,11 @@ label{
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 5px;
     font-weight: 400;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding-bottom: 1px;
 }
 input[type="checkbox"]{
     display: none;
@@ -139,8 +144,9 @@ input[type="checkbox"]:checked + label:hover{
     cursor: pointer;
 }
 form h3{
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
     padding-bottom: 5px;
+    color: var(--text);
 }
 .slider {
     position: relative;
@@ -162,7 +168,7 @@ form h3{
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 input[type="range"] {

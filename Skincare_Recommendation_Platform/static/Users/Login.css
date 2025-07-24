@@ -52,7 +52,7 @@ form button{
     transition: all 0.15s;
 }
 form button:hover{
-    background-color: var(--secondary);
+    background-color: var(--link);
     cursor: pointer;
 }
 form input{

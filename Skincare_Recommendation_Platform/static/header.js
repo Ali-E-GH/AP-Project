@@ -45,17 +45,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* ----=== user menu ===---- */
-    // const user_icon = document.getElementById('user_icon')
-    // const user_menu = document.getElementById('menu_content')
-    // user_icon.addEventListener('click', function(){
-    //     if(user_icon.classList.contains('clicked')){
-    //         user_icon.classList.remove('clicked');
-    //         user_menu.style.display = 'none';
-    //     } else {
-    //         user_icon.classList.add('clicked');
-    //         user_menu.style.display = 'flex';
-    //     }
-    // });
+    const user_icon = document.getElementById('user_icon');
+    const user_menu = document.getElementById('menu_content');
+    user_icon.addEventListener('click', function(){
+        if(user_icon.classList.contains('clicked')){
+            user_icon.classList.remove('clicked');
+            user_menu.style.display = 'none';
+        } else {
+            user_icon.classList.add('clicked');
+            user_menu.style.display = 'flex';
+        }
+    });
+    document.addEventListener('click', (event) => {
+    if (!user_icon.contains(event.target) && !user_menu.contains(event.target)) {
+        user_icon.classList.remove('clicked')
+        user_menu.style.display = 'none';
+    }
+    });
+
 });
 
 

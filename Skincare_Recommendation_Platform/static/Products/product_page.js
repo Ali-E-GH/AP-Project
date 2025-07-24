@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     async function addToCart() {
-    const response = await fetch('/user/cart/', {
+    const response = await fetch('/user/add_to_cart/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
