@@ -1,0 +1,43 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'variables.css' %}"> 
+    <link rel="stylesheet" href="{% static 'Quizzes/quiz_page.css' %}">
+{% endblock %}
+{% block title %}
+    Quiz
+{% endblock %}
+{% block content %}
+    {% block header %}
+    {% endblock %}
+    <div class="quiz_container">
+        <h2>Quiz</h2>
+        <form method="post" action=".">
+            {% csrf_token %}
+            {% for question in questions %}
+            <div class="q_container">
+                <h3>{{ question.question }}</h3>
+                {% if question.type == 'multiple_choice'%}
+                    <div class="options">
+                        {% for option in question.options %}
+                            <input type="checkbox" name="question_{{ question.id }}" id="{{option}}" value="{{ option }}">
+                            <label for="{{option}}">{{ option }}</label>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="slider">
+                        <output class="slider-value">5</output>
+                        <input name="question_{{ question.id }}" type="range" min="1" max="10" value="5" oninput="this.previousElementSibling.textContent = this.value">
+                        <div class="slider_fill"></div>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit">submit answers</button>
+        </form>
+    </div>
+<<<<<<< HEAD
+{% endblock %}
+=======
+{% endblock %}
+>>>>>>> 4c2f56052671abe3fa4b97f9b4e7dff71347549b

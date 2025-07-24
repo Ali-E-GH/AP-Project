@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'History',
     'Quizzes',
     'Choices',
-    'Routines',
+    'routines',
     'Contexts',
     'Image_Analysis',
     'Home',
@@ -88,8 +88,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'SkincareRecommendationPlatform',
-        'USER': 'Admin',
-        'PASSWORD': 'Admin',
+        'USER': 'postgres',
+        'PASSWORD': '881710',
         'HOST': 'localhost',
         'PORT': '5432',
     }

@@ -1,0 +1,68 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'variables.css' %}">
+    <link rel="stylesheet" href="{% static 'Users/cart_page.css' %}">
+    <script src="{% static 'Users/cart_page.js' %}"></script>
+{% endblock %} 
+
+{% block content %}
+    {% if cart.total_items %}
+        <section class="section_has_items">
+            <div class="total_container">
+                <p class="total_quantities">Total items: <span id="total_quantities">{{ cart.total_items }}</span></p>
+                <p class="shipping">Shipping fees: <span>$10</span></p>
+                <p class="total_cost">Total cost: <span id="total_cost">{{ cart.total_cost }}</span></p>
+                <button class="complete_purchase" id="complete_purchase"> Complete Purchase </button>
+            </div>
+            <div class="cart_items_container">
+                {% for item in items %}
+                    <div class="product_container" data-item-id="{{item.id}}">
+                        <a href="/product/{{item.product.id}}" class="">
+                            <div class="image_container">
+                                <img src="{% static item.product.image_url %}" alt="" class="product_image">
+                            </div>
+                            <div class="info_container">
+                                <h4 class="product_title">{{ item.product.name }}</h4>
+                                <p class="category">{{ item.product.category }}</p>
+                                <p class="skin_types">
+                                    for 
+                                    {% for skin in item.product.compatible_skin_types %}
+                                        {% if forloop.first %}
+                                        {{ skin }}
+                                        {% elif forloop.last %}
+                                        and {{ skin }}
+                                        {% else %}
+                                        , {{ skin }}
+                                        {% endif %}
+                                    {% endfor %}
+                                    skins.
+                                </p>
+                                <div class="price_and_rating">
+                                    <p class="rating">{{ item.product.rating }} <span class="star">&#9733;</span></p>
+                                    <p class="product_price">${{ item.product.price }}</p>
+                                </div>
+                            </div>
+                            </a>
+                            <div class="quantity_main_container">
+                                <div class="quantity_container">
+                                    <button id="increase_button_{{item.id}}" class="increase_button">+</button>
+                                    <div class="quantity" id="quantity_{{item.id}}"> {{ item.quantity }} </div>
+                                    <button id="decrease_button_{{item.id}}" class="decrease_button">-</button>
+                                </div>
+                                <p class="total_price" id="total_price_{{ item.id }}">${{ item.total_cost }}</p>
+                            </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% else %}
+        <section class="section_empty_cart">
+            <div class="empty_cart_container">
+                <img src="{% static 'images/empty_cart.png' %}" alt="" class="empty_img">
+                <h2> Your cart is empty </h2>
+            </div>
+        </section>
+
+    {% endif %}
+{% endblock %}

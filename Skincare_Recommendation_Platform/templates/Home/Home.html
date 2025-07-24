@@ -11,18 +11,37 @@
 {% block content %}
 <section>
     {% for product in products %}
-        <a href="{% url 'product_page' product.id %}">
-            <div class="product_container">
+        <div class="product_container">
+            <a href="{% url 'product_page' product.id %}">
                 <div class="product_image_container">
                     <img class="product_image" src="{% static product.image_url %}" alt="loading failed">
                 </div>
                 <div class="product_name_container">
                     <h4 class="product_name">{{ product.name }}</h4>
+                    <p class="skin_types">
+                        for 
+                        {% for skin in product.compatible_skin_types %}
+                            {% if forloop.first %}
+                            {{ skin }}
+                            {% elif forloop.last %}
+                            and {{ skin }}
+                            {% else %}
+                            , {{ skin }}
+                            {% endif %}
+                        {% endfor %}
+                        skins.
+                    </p>
                 </div>
-                <p class="product_price">${{ product.price }}</p>
-            </div>
-        </a>
+                <div class="price_and_rating">
+                    <p class="rating">{{ product.rating }} <span class="star">&#9733;</span></p>
+                    <p class="product_price">${{ product.price }}</p>
+                </div>
+            </a>
+        </div>
     {% endfor %}
 </section>
-<nav></nav>
+<<<<<<< HEAD
 {% endblock %}
+=======
+{% endblock %}
+>>>>>>> 4c2f56052671abe3fa4b97f9b4e7dff71347549b

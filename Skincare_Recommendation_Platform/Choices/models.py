@@ -58,7 +58,6 @@ class InteractionTypeChoices(models.TextChoices):
     LIKE = 'like', 'Like'
     WISHLIST = 'wishlist', 'Wishlist'
     CART = 'cart', 'Cart'
-    PURCHASE = 'purchase', 'Purchase'
 
 class SeasonChoices(models.TextChoices):
     
@@ -66,3 +65,11 @@ class SeasonChoices(models.TextChoices):
     SUMMER = 'summer', 'Summer'
     AUTUMN = 'autumn', 'Autumn'
     WINTER = 'winter', 'Winter'
+
+class QuestionChoices(models.TextChoices):
+
+    MULTIPLECHOICE = 'multiple_choice', 'Multiple Choice'
+
+    SLIDER = 'slider', 'Slider'
+
+    

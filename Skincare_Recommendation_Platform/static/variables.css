@@ -6,7 +6,7 @@
   --text: #212529;
   --text-muted: #6c757d;
   --border: #dee2e6;
-  --link: #0d6efd;
+  --link: #004dc0;
   --success: #198754;
   --warning: #ffc107;
   --danger: #dc3545;
@@ -24,7 +24,7 @@ body.dark-mode {
   --text: #cecfcf;
   --text-muted: #adb3b9;
   --border: #2c2f33;
-  --link: #66b2ff;
+  --link: #156cc2;
   --success: #51cf66;
   --warning: #ffd43b;
   --danger: #ff6b6b;

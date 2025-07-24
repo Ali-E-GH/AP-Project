@@ -29,7 +29,7 @@ def ProductPage(request, id):
         'product': product,
         'ingredients':ingredients,
         'last_ingredient': ingredients[-1],
-        'rating': round(mean(product.ratings), 1),
+        'rating': product.rating,
         'liked': already_liked,
         'views':Browsing_History.objects.filter(product=product, interaction_type='view').count(),
     })
