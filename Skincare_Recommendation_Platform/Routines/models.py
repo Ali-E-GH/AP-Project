@@ -20,7 +20,7 @@ class RoutinePlan(models.Model):
         return f"{self.user.username} - {self.get_name_display()}"
     
 class RoutineStep(models.Model):
-    routine_plan = models.ForeignKey(RoutinePlan, related_name='steps', on_delete=models.CASCADE)
+    routine_plan = models.ForeignKey(RoutinePlan, on_delete=models.CASCADE, related_name="routine_steps")
     order = models.PositiveIntegerField()
     description = models.TextField()
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.SET_NULL)
