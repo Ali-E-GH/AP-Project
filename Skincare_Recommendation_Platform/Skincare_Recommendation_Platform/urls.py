@@ -25,4 +25,5 @@ urlpatterns = [
     path('history/', include('History.urls')),
     path('quiz/', include('Quizzes.urls')),
     path('routines/', include('routines.urls')),
+
 ]

@@ -179,11 +179,10 @@ nav {
   color: var(--text);
   height: 100%;
 }
-.star{
+.star {
   position: absolute;
   color: gold;
   font-size: 25px;
   bottom: 23px;
   left: 25px;
 }
-
