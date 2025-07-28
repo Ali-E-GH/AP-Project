@@ -39,7 +39,8 @@ class QuizResults(models.Model):
         default=list,
         blank=True
     )
-    budget = models.CharField(max_length=50, choices=BUDGET_CHOICES, default='medium')
+    budget_range_min = models.DecimalField(max_digits=8, decimal_places=2)
+    budget_range_max = models.DecimalField(max_digits=8, decimal_places=2)
     lifestyle = models.CharField(max_length=50, choices=LIFESTYLE_CHOICES, default='minimal')
     skin_image = models.ImageField(upload_to='skin_analysis/', null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -48,13 +49,20 @@ class QuizResults(models.Model):
         return f"Quiz result for {self.user.username}"
     
 class Question(models.Model):
+    QUESTION_TYPES = [
+    ('text', 'Text Answer'),
+    ('single_choice', 'Single Choice'),
+    ('multiple_choice', 'Multiple Choice'),
+    ('slider', 'Slider Scale'),
+    ]
     order = models.PositiveIntegerField(default=0)
     question = models.CharField(max_length=255)
-    type = models.CharField(max_length=255, choices=QuestionChoices.choices)
+    type = models.CharField(
+        max_length=255, 
+        choices=QUESTION_TYPES,
+        default='single_choice')
     options = ArrayField(
-        models.CharField(max_length=50),
+        models.CharField(max_length=100),
         null=True,
         blank=True
     )
-    class Meta:
-        ordering = ['order']
