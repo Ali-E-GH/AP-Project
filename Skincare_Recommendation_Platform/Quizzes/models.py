@@ -55,6 +55,14 @@ class Question(models.Model):
     ('multiple_choice', 'Multiple Choice'),
     ('slider', 'Slider Scale'),
     ]
+    # QUESTION_NAME = [
+    #     ('skin_type', 'Skin'), 
+    #     ('concerns', 'Concerns'),
+    #     ('preferences', 'Preferences'),
+    #     ('timestamp', 'Timestamp'),
+    #     ('budget', 'Budget'),
+    # ]
+    # question_name = models.CharField(max_length=255, default='Your Question', choices=QUESTION_NAME)
     order = models.PositiveIntegerField(default=0)
     question = models.CharField(max_length=255)
     type = models.CharField(
@@ -66,3 +74,9 @@ class Question(models.Model):
         null=True,
         blank=True
     )
+    # created_date = models.DateTimeField(auto_now_add=True)
+    # class Meta:
+    #     ordering = ['-created_date']
+        
+    def __str__(self):
+        return self.question

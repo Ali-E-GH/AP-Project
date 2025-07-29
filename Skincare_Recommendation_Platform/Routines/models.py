@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-
 from Users.models import User
 from Products.models import Product
 # Create your models here.
