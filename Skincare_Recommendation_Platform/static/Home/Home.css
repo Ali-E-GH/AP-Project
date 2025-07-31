@@ -180,7 +180,7 @@ nav {
   color: var(--text);
   height: 100%;
 }
-.star{
+.star {
   position: absolute;
   color: gold;
   font-size: 25px;

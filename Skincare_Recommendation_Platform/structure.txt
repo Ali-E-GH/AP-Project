@@ -1,0 +1,300 @@
+Folder PATH listing
+Volume serial number is F050-E6C9
+C:.
+³   manage.py
+³   structure.txt
+³   
+ÃÄÄÄChoices
+³   ³   admin.py
+³   ³   apps.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           __init__.cpython-313.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-313.pyc
+³           apps.cpython-313.pyc
+³           models.cpython-313.pyc
+³           __init__.cpython-313.pyc
+³           
+ÃÄÄÄContexts
+³   ³   admin.py
+³   ³   apps.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   0001_initial.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           0001_initial.cpython-313.pyc
+³   ³           __init__.cpython-313.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-313.pyc
+³           apps.cpython-313.pyc
+³           models.cpython-313.pyc
+³           __init__.cpython-313.pyc
+³           
+ÃÄÄÄHistory
+³   ³   admin.py
+³   ³   apps.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   urls.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   0001_initial.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           0001_initial.cpython-313.pyc
+³   ³           __init__.cpython-313.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-313.pyc
+³           apps.cpython-313.pyc
+³           models.cpython-313.pyc
+³           urls.cpython-313.pyc
+³           views.cpython-313.pyc
+³           __init__.cpython-313.pyc
+³           
+ÃÄÄÄHome
+³   ³   admin.py
+³   ³   apps.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   urls.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           __init__.cpython-313.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-313.pyc
+³           apps.cpython-313.pyc
+³           models.cpython-313.pyc
+³           urls.cpython-313.pyc
+³           views.cpython-313.pyc
+³           __init__.cpython-313.pyc
+³           
+ÃÄÄÄImage_Analysis
+³   ³   admin.py
+³   ³   apps.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   0001_initial.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           0001_initial.cpython-313.pyc
+³   ³           __init__.cpython-313.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-313.pyc
+³           apps.cpython-313.pyc
+³           models.cpython-313.pyc
+³           __init__.cpython-313.pyc
+³           
+ÃÄÄÄProducts
+³   ³   admin.py
+³   ³   apps.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   urls.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   0001_initial.py
+³   ³   ³   0002_alter_product_rating.py
+³   ³   ³   0003_alter_product_rating_alter_product_tags.py
+³   ³   ³   0004_alter_product_concerns_targeted.py
+³   ³   ³   0005_alter_product_image_url.py
+³   ³   ³   0006_product_views.py
+³   ³   ³   0007_alter_product_views.py
+³   ³   ³   0008_product_description.py
+³   ³   ³   0009_remove_product_rating_product_ratings.py
+³   ³   ³   0010_alter_product_ratings.py
+³   ³   ³   0011_remove_product_views_alter_product_ratings.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           0001_initial.cpython-313.pyc
+³   ³           0002_alter_product_rating.cpython-313.pyc
+³   ³           0003_alter_product_rating_alter_product_tags.cpython-313.pyc
+³   ³           0004_alter_product_concerns_targeted.cpython-313.pyc
+³   ³           0005_alter_product_image_url.cpython-313.pyc
+³   ³           0006_product_views.cpython-313.pyc
+³   ³           0007_alter_product_views.cpython-313.pyc
+³   ³           0008_product_description.cpython-313.pyc
+³   ³           0009_remove_product_rating_product_ratings.cpython-313.pyc
+³   ³           0010_alter_product_ratings.cpython-313.pyc
+³   ³           0011_remove_product_views_alter_product_ratings.cpython-313.pyc
+³   ³           __init__.cpython-313.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-313.pyc
+³           apps.cpython-313.pyc
+³           models.cpython-313.pyc
+³           urls.cpython-313.pyc
+³           views.cpython-313.pyc
+³           __init__.cpython-313.pyc
+³           
+ÃÄÄÄQuizzes
+³   ³   admin.py
+³   ³   apps.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   urls.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   0001_initial.py
+³   ³   ³   0002_question.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           0001_initial.cpython-313.pyc
+³   ³           0002_question.cpython-313.pyc
+³   ³           __init__.cpython-313.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-313.pyc
+³           apps.cpython-313.pyc
+³           models.cpython-313.pyc
+³           urls.cpython-313.pyc
+³           views.cpython-313.pyc
+³           __init__.cpython-313.pyc
+³           
+ÃÄÄÄRoutines
+³   ³   admin.py
+³   ³   apps.py
+³   ³   models.py
+³   ³   tests.py
+³   ³   urls.py
+³   ³   views.py
+³   ³   __init__.py
+³   ³   
+³   ÃÄÄÄmigrations
+³   ³   ³   0001_initial.py
+³   ³   ³   __init__.py
+³   ³   ³   
+³   ³   ÀÄÄÄ__pycache__
+³   ³           0001_initial.cpython-313.pyc
+³   ³           __init__.cpython-313.pyc
+³   ³           
+³   ÀÄÄÄ__pycache__
+³           admin.cpython-313.pyc
+³           apps.cpython-313.pyc
+³           models.cpython-313.pyc
+³           __init__.cpython-313.pyc
+³           
+ÃÄÄÄSkincare_Recommendation_Platform
+³   ³   asgi.py
+³   ³   settings.py
+³   ³   urls.py
+³   ³   wsgi.py
+³   ³   __init__.py
+³   ³   
+³   ÀÄÄÄ__pycache__
+³           settings.cpython-313.pyc
+³           urls.cpython-313.pyc
+³           wsgi.cpython-313.pyc
+³           __init__.cpython-313.pyc
+³           
+ÃÄÄÄstatic
+³   ³   header.css
+³   ³   header.js
+³   ³   variables.css
+³   ³   
+³   ÃÄÄÄHome
+³   ³       Home.css
+³   ³       
+³   ÃÄÄÄimages
+³   ³       cerave_cleanser.png
+³   ³       empty_cart.png
+³   ³       glacier_cleanser.png
+³   ³       No7_cleanser.png
+³   ³       
+³   ÃÄÄÄProducts
+³   ³       product_page.css
+³   ³       product_page.js
+³   ³       
+³   ÃÄÄÄQuizzes
+³   ³       quiz_page.css
+³   ³       quiz_page.js
+³   ³       
+³   ÀÄÄÄUsers
+³           cart_page.css
+³           cart_page.js
+³           Login.css
+³           Signup.css
+³           
+ÃÄÄÄtemplates
+³   ³   header.html
+³   ³   
+³   ÃÄÄÄHome
+³   ³       Home.html
+³   ³       
+³   ÃÄÄÄProducts
+³   ³       product_page.html
+³   ³       
+³   ÃÄÄÄQuizzes
+³   ³       quiz_page.html
+³   ³       
+³   ÀÄÄÄUsers
+³           cart_page.html
+³           Login.html
+³           Signup.html
+³           
+ÀÄÄÄUsers
+    ³   admin.py
+    ³   apps.py
+    ³   models.py
+    ³   tests.py
+    ³   urls.py
+    ³   views.py
+    ³   __init__.py
+    ³   
+    ÃÄÄÄmigrations
+    ³   ³   0001_initial.py
+    ³   ³   0002_cart.py
+    ³   ³   0003_cart_user_alter_userprofile_user_cartitem.py
+    ³   ³   __init__.py
+    ³   ³   
+    ³   ÀÄÄÄ__pycache__
+    ³           0001_initial.cpython-313.pyc
+    ³           0002_cart.cpython-313.pyc
+    ³           0003_cart_user_alter_userprofile_user_cartitem.cpython-313.pyc
+    ³           __init__.cpython-313.pyc
+    ³           
+    ÀÄÄÄ__pycache__
+            admin.cpython-313.pyc
+            apps.cpython-313.pyc
+            models.cpython-313.pyc
+            urls.cpython-313.pyc
+            views.cpython-313.pyc
+            __init__.cpython-313.pyc
+            

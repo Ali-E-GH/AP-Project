@@ -67,7 +67,6 @@ class SeasonChoices(models.TextChoices):
     WINTER = 'winter', 'Winter'
 
 class QuestionChoices(models.TextChoices):
-
     MULTIPLECHOICE = 'multiple_choice', 'Multiple Choice'
     SLIDER = 'slider', 'Slider'
-    
+

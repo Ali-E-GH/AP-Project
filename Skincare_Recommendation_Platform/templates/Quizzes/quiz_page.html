@@ -24,6 +24,13 @@
                             <label for="{{option}}">{{ option }}</label>
                         {% endfor %}
                     </div>
+                {% elif question.type == 'single_choice'%}
+                    <div class="options">
+                        {% for option in question.options %}
+                            <input type="checkbox" name="question_{{ question.id }}" id="{{option}}" value="{{ option }}">
+                            <label for="{{option}}">{{ option }}</label>
+                        {% endfor %}
+                    </div>
                 {% else %}
                     <div class="slider">
                         <output class="slider-value">5</output>
@@ -37,3 +44,5 @@
         </form>
     </div>
 {% endblock %}
+
+
