@@ -35,8 +35,27 @@ def ProductPage(request, id):
     })
 
 def SearchPage(request):
+    if(request.method == 'POST'):
+        searched_phrase = request.POST.get('search')
+        # rest here
+        products = Product.objects.all()
+    elif(request.method == 'GET'):
+        searched_phrase = request.GET.get('searched_phrase')
+        brand_name = request.GET.get('brand_filter')
+        min_price = request.GET.get('min_price')
+        max_price = request.GET.get('max_price')
+        min_rating = request.GET.get('min_rating')
+        max_rating = request.GET.get('max_rating')
+        category = request.GET.get('category_filter')
+        skin_types = request.GET.getlist('skin_type_options')
+        concerns = request.GET.getlist('targeted_concerns_options')
+        ingredients = request.GET.getlist('ingredients_options')
+        #rest here
+    else:
+        products = Product.objects.all()
     products = Product.objects.all()
-    
+
+
     return render(request, 'Products/search_page.html', {
         'products': products,
     })

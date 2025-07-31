@@ -39,10 +39,11 @@ document.addEventListener("DOMContentLoaded", function () {
     //         })
     //     });
     // }
-    const search_button = document.getElementById('search_button')
-    search_button.addEventListener('click', function () {
+    function submitValues(){
         document.getElementById('search_bar_form').submit();
-    });
+    }
+    const search_button = document.getElementById('search_button')
+    search_button.addEventListener('click', submitValues);
 
     /* ----=== menu ===---- */
     const user_icon = document.getElementById('user_icon');
@@ -74,10 +75,10 @@ document.addEventListener("DOMContentLoaded", function () {
         user_icon.classList.remove('clicked')
         user_menu.style.display = 'none';
     }
-    if (!product_button.contains(event.target) && !product_menu.contains(event.target)) {
-        product_button.classList.remove('clicked')
-        product_menu.style.display = 'none';
-    }
+    // if (!product_button.contains(event.target) && !product_menu.contains(event.target)) {
+    //     product_button.classList.remove('clicked')
+    //     product_menu.style.display = 'none';
+    // }
     });
 
 });

@@ -411,3 +411,6 @@ input[type="checkbox"]:checked + label:hover{
   background-color: var(--link);
   cursor: pointer;
 }
+span{
+  transition: none !important;
+}

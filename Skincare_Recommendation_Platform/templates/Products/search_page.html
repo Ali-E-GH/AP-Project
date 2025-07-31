@@ -45,7 +45,8 @@
 
 </section>
 <nav>
-    <form action="." method="get">
+    <form action="." method="get" id="filter_form">
+        {% csrf_token %}
         <h2 class="filter_title">Filters</h2>
         <div class="brand_filter">
             <h4 class="brand_filter_label"> Brand </h4>
@@ -88,19 +89,19 @@
         <div class="skin_type_filter">
             <h4 class="expandable_title"> Skin types <span class="arrow"><i class="fa-solid fa-angle-down" id="skin_type_arrow"></i></span></h4>
             <div class="hidden_list" id="hidden_skin_type_list">
-                <input type="checkbox" name="skin_type_options" id="oily">
+                <input type="checkbox" name="skin_type_options" id="oily" value="oily">
                 <label for="oily"> Oily </label>
 
-                <input type="checkbox" name="skin_type_options" id="combination">
+                <input type="checkbox" name="skin_type_options" id="combination" value="combination">
                 <label for="combination"> Combination </label>
 
-                <input type="checkbox" name="skin_type_options" id="dry">
+                <input type="checkbox" name="skin_type_options" id="dry" value="dry">
                 <label for="dry"> Dry </label>
 
-                <input type="checkbox" name="skin_type_options" id="sensitive">
+                <input type="checkbox" name="skin_type_options" id="sensitive" value="sensitive">
                 <label for="sensitive"> Sensitive </label>
 
-                <input type="checkbox" name="skin_type_options" id="normal">
+                <input type="checkbox" name="skin_type_options" id="normal" value="normal">
                 <label for="normal"> Normal </label>
 
             </div>
@@ -108,19 +109,19 @@
         <div class="targeted_concerns_filter">
             <h4 class="expandable_title"> Targeted concerns <span class="arrow"><i class="fa-solid fa-angle-down" id="targeted_concerns_arrow"></i></span></h4>
             <div class="hidden_list" id="hidden_targeted_concerns_list">
-                <input type="checkbox" name="targeted_concerns_options" id="acne">
+                <input type="checkbox" name="targeted_concerns_options" id="acne" value="acne">
                 <label for="acne"> Acne </label>
 
-                <input type="checkbox" name="targeted_concerns_options" id="redness">
+                <input type="checkbox" name="targeted_concerns_options" id="redness" value="redness">
                 <label for="redness"> Redness </label>
 
-                <input type="checkbox" name="targeted_concerns_options" id="dark_spots">
+                <input type="checkbox" name="targeted_concerns_options" id="dark_spots" value="dark_spots">
                 <label for="dark_spots"> Dark Spots </label>
 
-                <input type="checkbox" name="targeted_concerns_options" id="aging">
+                <input type="checkbox" name="targeted_concerns_options" id="aging" value="aging">
                 <label for="aging"> Aging </label>
 
-                <input type="checkbox" name="targeted_concerns_options" id="dulness">
+                <input type="checkbox" name="targeted_concerns_options" id="dulness" value="dulness">
                 <label for="dulness"> Dulness </label>
 
             </div>
@@ -128,41 +129,42 @@
         <div class="ingredients_filter">
             <h4 class="expandable_title"> Ingredients <span class="arrow"><i class="fa-solid fa-angle-down" id="ingredients_arrow"></i></span></h4>
             <div class="hidden_list" id="hidden_ingredients_list">
-                <input type="checkbox" name="ingredients_options" id="niacinamide">
+                <input type="checkbox" name="ingredients_options" id="niacinamide" value="niacinamide">
                 <label for="niacinamide"> Niacinamide </label>
 
-                <input type="checkbox" name="ingredients_options" id="hyaluronic_acid">
+                <input type="checkbox" name="ingredients_options" id="hyaluronic_acid" value="hyaluronic_acid">
                 <label for="hyaluronic_acid"> Hyaluronic Acid </label>
 
-                <input type="checkbox" name="ingredients_options" id="salicylic_acid">
+                <input type="checkbox" name="ingredients_options" id="salicylic_acid" value="salicylic_acid">
                 <label for="salicylic_acid"> Salicylic Acid </label>
 
-                <input type="checkbox" name="ingredients_options" id="retinol">
+                <input type="checkbox" name="ingredients_options" id="retinol" value="retinol">
                 <label for="retinol"> Retinol </label>
 
-                <input type="checkbox" name="ingredients_options" id="vitamin_c">
+                <input type="checkbox" name="ingredients_options" id="vitamin_c" value="vitamin_c">
                 <label for="vitamin_c"> Vitamin C </label>
 
-                <input type="checkbox" name="ingredients_options" id="ceramides">
+                <input type="checkbox" name="ingredients_options" id="ceramides" value="ceramides">
                 <label for="ceramides"> Ceramides </label>
 
-                <input type="checkbox" name="ingredients_options" id="glycolic_acid">
+                <input type="checkbox" name="ingredients_options" id="glycolic_acid" value="glycolic_acid">
                 <label for="glycolic_acid"> Glycolic Acid </label>
 
-                <input type="checkbox" name="ingredients_options" id="zinc_oxide">
+                <input type="checkbox" name="ingredients_options" id="zinc_oxide" value="zinc_oxide">
                 <label for="zinc_oxide"> Zinc Oxide </label>
 
-                <input type="checkbox" name="ingredients_options" id="tea_tree_oil">
+                <input type="checkbox" name="ingredients_options" id="tea_tree_oil" value="tea_tree_oil">
                 <label for="tea_tree_oil"> Tea Tree Oil </label>
 
-                <input type="checkbox" name="ingredients_options" id="aloe_vera">
+                <input type="checkbox" name="ingredients_options" id="aloe_vera" value="aloe_vera">
                 <label for="aloe_vera"> Aloe Vera </label>
 
             </div>
         </div>
         <div class="filter_button_container">
-            <button class="filter_button" type="submit"> Filter </button>
+            <button class="filter_button" id="filter_button" type="button"> Filter </button>
         </div>
+        <input type="hidden" name="searched_phrase" id="search_input">
     </form>
 </nav>
 {% endblock %}

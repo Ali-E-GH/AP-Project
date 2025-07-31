@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
     if (!priceSlider) return; // Prevent error if slider is missing
 
     noUiSlider.create(priceSlider, {
-        start: [0, 1000],
+        start: [0, 2500],
         connect: true,
         range: {
         min: 0,
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     if (ratingSlider) {
     noUiSlider.create(ratingSlider, {
-        start: [2.5, 5],
+        start: [0, 5],
         connect: true,
         range: {
         min: 0,
@@ -95,4 +95,17 @@ document.addEventListener('DOMContentLoaded', function(){
     ingredients_arrow.addEventListener('click', function(){
         menuClickHandler(ingredient_menu, ingredients_arrow);
     })
+
+    function submitValues() {
+        var searched_phrase = document.getElementById('search_bar').value;
+        const filter_form = document.getElementById('filter_form');
+        document.getElementById('search_input').value = searched_phrase;
+        filter_form.submit();
+    }
+
+    const filter_button = document.getElementById('filter_button');
+    const search_button = document.getElementById('search_button');
+    filter_button.addEventListener('click', submitValues);
+    search_button.addEventListener('click', submitValues);
+
 })
