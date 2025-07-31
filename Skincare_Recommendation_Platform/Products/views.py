@@ -33,3 +33,10 @@ def ProductPage(request, id):
         'liked': already_liked,
         'views':Browsing_History.objects.filter(product=product, interaction_type='view').count(),
     })
+
+def SearchPage(request):
+    products = Product.objects.all()
+    
+    return render(request, 'Products/search_page.html', {
+        'products': products,
+    })

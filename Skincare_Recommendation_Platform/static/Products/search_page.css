@@ -1,0 +1,413 @@
+/*{
+  box-sizing: border-box;
+} */
+
+body {
+  display: grid;
+  grid-template-areas: 
+    "header header"
+    "filter section";
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 80px 1fr;
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+}
+/* header {
+  grid-area: header;
+  background-color: var(--background);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+}
+
+header ul {
+  display: flex;
+  justify-content: space-between;
+  height: inherit;
+  width: 350px;
+  align-items: center;
+  margin: 0;
+  padding-right: 15px;
+}
+
+header li {
+  list-style: none;
+  margin: 5px;
+  color: var(--primary);
+  font-size: 1.4em;
+}
+
+header li:hover {
+  color: var(--secondary);
+  border-bottom: 1px solid var(--border);
+  margin-top: 2px;
+}
+
+.icon_container {
+  width: 130px;
+  height: inherit;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+}
+i{
+  font-size: 50px;
+  color: var(--primary);
+}
+i:hover{
+  color: var(--secondary);
+  margin-bottom: 3px;
+}
+.username{
+    font-size: 1.4em;
+    color: var(--secondary);
+} */
+
+section {
+  grid-area: section;
+  background-color: var(--surface);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 8px;
+}
+
+.product_container {
+  width: 216px;
+  height: 360px;
+  background-color: var(--background);
+  border-radius: 5px;
+  /* box-shadow: 0px 0px 10px 1px var(--shadow); */
+  /* padding: 12px; */
+  margin: 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 1px solid var(--border); */
+}
+
+.product_container a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product_container:hover {
+  box-shadow: 0px 0px 10px 1px var(--shadow-focus);
+  cursor: pointer;
+}
+
+.product_image_container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 7px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.product_image {
+  width: inherit;
+  height: inherit;
+}
+
+.product_name {
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.8em;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: -5px;
+}
+
+.product_price {
+  text-align: center;
+  font-family: inherit;
+  color: var(--text);
+  height: 20px;
+}
+
+.product_name_container {
+  height: 80px;
+  border-bottom: 1px solid var(--border);
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.skin_types{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 0.8em;
+  color: var(--text);
+}
+a {
+  text-decoration: none;
+}
+
+.price_and_rating{
+  width: 60%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  height: 50px;
+}
+.rating{
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  font-family: inherit;
+  color: var(--text);
+  height: 100%;
+}
+.star{
+  position: absolute;
+  color: gold;
+  font-size: 25px;
+  bottom: 23px;
+  left: 25px;
+}
+
+
+
+
+nav {
+  grid-area: filter;
+  background-color: var(--background);
+  border-right: 1px solid var(--border);
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1px;
+  transition: none !important;
+}
+
+nav form{
+  width: 90%;
+}
+
+nav h2{
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 12px;
+}
+
+nav span{
+  transition: none !important;
+}
+
+/* You can place this inside a separate .css file or <style> tag */
+.price_filter, .rating-slider{
+  padding-bottom: 100px;
+  margin-top: -20px;
+}
+
+#price-slider, #rating-slider {
+  margin: 15px 0;
+  height: 6px;
+  background-color: var(--surface);
+  box-shadow: inset 0 1px 2px var(--shadow);
+  border-radius: 5px;
+  position: relative;
+  border: none;
+  width: 100%;
+}
+
+/* Fill (active range between two thumbs) */
+#price-slider .noUi-connect, #rating-slider .noUi-connect{
+  background-color: var(--primary);
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  position: absolute;
+  /* left: 11px; */
+}
+
+/* Handles */
+#price-slider .noUi-handle, #rating-slider .noUi-handle {
+  background-color: var(--secondary);
+  width: 5px;
+  height: 16px;
+  border-radius: 3px;
+  border: none;
+  transform: translateY(-2%);
+  position: absolute;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  cursor: grab;
+  left: calc(100% - 1px);
+}
+
+/* Remove default handle bars */
+#price-slider .noUi-handle::before,
+#price-slider .noUi-handle::after,
+#rating-slider .noUi-handle::before,
+#rating-slider .noUi-handle::after{
+  display: none;
+}
+
+#price-slider .noUi-connect,
+#price-slider .noUi-handle {
+  transition: none !important;
+  -webkit-transition: none !important; /* for Safari */
+}
+
+/* Hover effect */
+#price-slider .noUi-handle:hover, #rating-slider .noUi-handle:hover{
+  background-color: var(--primary);
+}
+#minPrice, #maxPrice, .price-values{
+  transition: none !important;
+}
+
+.brand_filter{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: -10px;
+}
+
+nav form {
+  color: var(--text);
+}
+
+nav form h4{
+  color: var(--text);
+  transition: none !important;
+}
+
+nav form div{
+  height: 80px;
+}
+nav form input{
+  border-radius: 5px;
+  background-color: var(--surface);
+  /* border-bottom: 1px solid var(--border) !important; */
+  padding-left: 10px;
+  height: 25px;
+  border: none;
+  width: 65%;
+  color: var(--text);
+}
+nav form input:focus{
+  outline: none;
+  background-color: var(--clicked-surface) !important;
+}
+
+nav form input:-webkit-autofill{
+  box-shadow: 0 0 0px 1000px var(--surface) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+  /* transition: background-color 5000s ease-in-out 0s; */
+}
+nav form input:-webkit-autofill:focus{
+  box-shadow: 0 0 0px 1000px var(--clicked-surface) inset !important;
+}
+
+.category_filter{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  height: 50px;
+  margin-top: 20px;
+}
+.expandable_title{
+  display: flex;
+  justify-content: space-between;
+}
+.arrow{
+  margin-right: 10px;
+  font-size: 20px;
+}
+.arrow:hover{
+  color: var(--primary);
+  cursor: pointer;
+}
+.arrow.clicked{
+  color: var(--secondary);
+}
+.arrow.clicked:hover{
+  color: var(--secondary);
+}
+.hidden_list{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  padding-bottom: 10px;
+}
+label{
+  width: 80%;
+  background-color: var(--surface);
+  color: var(--text);
+  font-size: 1em;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-weight: 400;
+  padding-bottom: 1px;
+  margin-top: 10px;
+}
+input[type="checkbox"]{
+  display: none;
+}
+input[type="checkbox"]::before{
+  width: 5px;
+  height: 5px;
+  border: solid 1px black;
+}
+input[type="checkbox"] + label:hover{
+  background-color: var(--clicked-surface);
+  cursor: pointer;
+}
+input[type="checkbox"]:checked + label{
+  background-color: var(--primary);
+  color: var(--text-on-primary);
+}
+input[type="checkbox"]:checked + label:hover{
+  background-color: var(--link);
+  cursor: pointer;
+}
+
+.skin_type_filter, .targeted_concerns_filter, .ingredients_filter{
+  height: auto;
+}
+.filter_button_container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.filter_button{
+  width: 90%;
+  height: 35px;
+  border-radius: 5px;
+  background-color: var(--primary);
+  border: none;
+  color: var(--text-on-primary);
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-top: 10px;
+}
+.filter_button:hover{
+  background-color: var(--link);
+  cursor: pointer;
+}

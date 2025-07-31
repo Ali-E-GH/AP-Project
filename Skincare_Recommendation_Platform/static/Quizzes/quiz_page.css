@@ -144,7 +144,7 @@ input[type="checkbox"]:checked + label:hover{
     cursor: pointer;
 }
 form h3{
-    border-bottom: 2px solid var(--border);
+    border-bottom: 1.5px solid var(--border);
     padding-bottom: 5px;
     color: var(--text);
 }

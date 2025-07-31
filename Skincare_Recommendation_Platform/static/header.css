@@ -31,11 +31,12 @@ header {
   align-items: center;
   margin: 0;
   padding-right: 15px;
+  margin-right: 10px;
 }
 
 .nav_options {
   list-style: none;
-  margin: 5px;
+  /* margin: 5px; */
   color: var(--primary);
   font-size: 1.4em;
 }
@@ -43,7 +44,7 @@ header {
 .nav_options:hover {
   color: var(--link);
   border-bottom: 1px solid var(--border);
-  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 .icon_container {
@@ -118,20 +119,36 @@ header form i{
   flex-direction: column;
   align-items: center;
 }
-.menu_content{
-  border-radius: 15px;
+.menu_user_content{
+  border-radius: 10px;
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 150px;
+  width: 135px;
   top: 57px;
-  /* background-color: var(--surface); */
-  /* border: 1px solid var(--border); */
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.menu_products_content{
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 135px;
+  top: 54px;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .menu_options{
-  border-radius: 15px;
+  /* border-radius: 15px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,18 +157,25 @@ header form i{
   text-decoration: none;
   list-style: none;
   color: var(--secondary);
-  border: 1px solid var(--border);
+  /* border-bottom: 1px solid var(--border); */
+  /* border-top: 1px solid var(--border); */
   font-size: 1.1em;
-  background-color: var(--background);
+  /* background-color: var(--background); */
 }
 .menu_options:hover{
-  background-color: var(--surface);
+  /* background-color: var(--surface); */
   color: var(--primary);
-}
-.fa-user.clicked{
-  color: var(--secondary);
-}
-.fa-user.clicked:hover{
   cursor: pointer;
-  margin: 0;
+}
+.menu_button.clicked{
+  color: var(--secondary) !important;
+}
+.menu_button.clicked:hover{
+  cursor: pointer;
+  border-bottom: none;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.menu_button:hover{
+  cursor: pointer;
 }

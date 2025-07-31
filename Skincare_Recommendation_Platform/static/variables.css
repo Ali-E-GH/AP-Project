@@ -1,6 +1,6 @@
 :root {
   --background: #ffffff;
-  --surface: #f2f2f2;
+  --surface: #eeeeee;
   --primary: #007bff;
   --secondary: #575f66;
   --text: #212529;
@@ -13,7 +13,7 @@
   --text-on-primary: #ffffff;
   --clicked-surface: #dfdbdb;
   --shadow: rgba(0, 0, 0, 0.2);
-  --shadow-focus: rgba(0, 0, 0, 0.5);
+  --shadow-focus: rgba(0, 0, 0, 0.25);
 }
 
 body.dark-mode {
@@ -30,6 +30,6 @@ body.dark-mode {
   --danger: #ff6b6b;
   --text-on-primary: #ffffffbd;
   --clicked-surface: #292929;
-  --shadow-focus: rgba(80, 80, 80, 0.7);
+  --shadow-focus: rgba(80, 80, 80, 0.4);
   --shadow: rgba(80, 80, 80, 0.2);
 }

@@ -28,8 +28,8 @@
                 <div class="icon_container">
                     <i class="fa-solid fa-moon" id="theme_toggle"></i>
                     <div class="dropdown_user_menu">
-                        <i class="fa-solid fa-user" id="user_icon"></i>
-                        <div class="menu_content" id="menu_content">
+                        <i class="fa-solid fa-user menu_button" id="user_icon"></i>
+                        <div class="menu_user_content" id="menu_user_content">
                             <!-- <a href="" class="menu_options">Setting</a> -->
                             <a href="/user/cart/" class="menu_options">Cart</a>
                             <a href="/user/logout/" class="menu_options">Log out</a>
@@ -44,7 +44,7 @@
                     <p class="username">Login</p>
                 </div>
             {% endif %}
-                <form action="." method="get" name="search" class="search_bar_form" id="search_bar_form">
+                <form action="/product/search/" method="post" name="search" class="search_bar_form" id="search_bar_form">
                     {% csrf_token %}
                     <div class="search_bar_container">
                         <input name="search" type="text" class="search_bar"  placeholder="Search" id="search_bar">
@@ -55,8 +55,18 @@
                 <ul class="nav_ul">
                     <a href="/"><li class="nav_options">Home</li></a>
                     <a href="/quiz"><li class="nav_options">Quiz</li></a>
-                    <a href="/routines"><li class="nav_options">Routines</li></a>
-                    <a href=""><li class="nav_options">Products</li></a>
+                    <a href="/routines"><li class="nav_options">Routines</li></a>    
+                    <div class="dropdown_user_menu">
+                        <li class="nav_options menu_button" id="product_button">Products</li>
+                        <div class="menu_products_content" id="menu_products_content">
+                            <!-- <a href="" class="menu_options">Setting</a> -->
+                            <a class="menu_options">Cleanser</a>
+                            <a class="menu_options">Serum</a>
+                            <a class="menu_options">Moisturizer</a>
+                            <a class="menu_options">Toner</a>
+                            <a class="menu_options">Sunscreen</a>
+                        </div>
+                    </div>
                 </ul>
             {% else %}
             {% endif %}

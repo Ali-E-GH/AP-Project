@@ -1,0 +1,168 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'variables.css' %}">
+    <link rel="stylesheet" href="{% static 'Products/search_page.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/nouislider@15.6.1/dist/nouislider.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.6.1/dist/nouislider.min.js"></script>
+    <script src="{% static 'Products/search_page.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<section>
+    {% for product in products %}
+        <div class="product_container">
+            <a href="{% url 'product_page' product.id %}">
+                <div class="product_image_container">
+                    <img class="product_image" src="{% static product.image_url %}" alt="loading failed">
+                </div>
+                <div class="product_name_container">
+                    <h4 class="product_name">{{ product.name }}</h4>
+                    <p class="skin_types">
+                        for 
+                        {% for skin in product.compatible_skin_types %}
+                            {% if forloop.first %}
+                            {{ skin }}
+                            {% elif forloop.last %}
+                            and {{ skin }}
+                            {% else %}
+                            , {{ skin }}
+                            {% endif %}
+                        {% endfor %}
+                        skins.
+                    </p>
+                </div>
+                <div class="price_and_rating">
+                    <p class="rating">{{ product.rating }} <span class="star">&#9733;</span></p>
+                    <p class="product_price">${{ product.price }}</p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+
+</section>
+<nav>
+    <form action="." method="get">
+        <h2 class="filter_title">Filters</h2>
+        <div class="brand_filter">
+            <h4 class="brand_filter_label"> Brand </h4>
+            <input name="brand_filter" type="text" class="brand_filter_input">
+        </div>
+        <div class="price_filter">
+            <h4 class="price_filter_label"> Price range </h4>
+            <div id="price-slider"></div>
+
+            <div class="price-values">
+            Price: $<span id="minPrice">0</span> - $<span id="maxPrice">10000</span>
+            </div>
+
+            <input type="hidden" name="min_price" id="min_price_input">
+            <input type="hidden" name="max_price" id="max_price_input">
+        </div>
+        <div class="rating_filter">
+            <h4 class="rating_filter_label"> Rating range </h4>
+            <div id="rating-slider"></div>
+
+            <div class="rating-values">
+            rating: <span id="minrating">0</span> - <span id="maxrating">5</span>
+            </div>
+
+            <input type="hidden" name="min_rating" id="min_rating_input">
+            <input type="hidden" name="max_rating" id="max_rating_input">
+        </div>
+        <div class="category_filter">
+            <h4 class="category_title">Category</h4>
+            <input type="text" name="category_filter" id="category_filter" list="category_filter_options">
+
+            <datalist id="category_filter_options">
+                <option value="Cleanser">
+                <option value="Serum">
+                <option value="Moisturizer">
+                <option value="Toner">
+                <option value="Sunscreen">
+            </datalist>
+        </div>
+        <div class="skin_type_filter">
+            <h4 class="expandable_title"> Skin types <span class="arrow"><i class="fa-solid fa-angle-down" id="skin_type_arrow"></i></span></h4>
+            <div class="hidden_list" id="hidden_skin_type_list">
+                <input type="checkbox" name="skin_type_options" id="oily">
+                <label for="oily"> Oily </label>
+
+                <input type="checkbox" name="skin_type_options" id="combination">
+                <label for="combination"> Combination </label>
+
+                <input type="checkbox" name="skin_type_options" id="dry">
+                <label for="dry"> Dry </label>
+
+                <input type="checkbox" name="skin_type_options" id="sensitive">
+                <label for="sensitive"> Sensitive </label>
+
+                <input type="checkbox" name="skin_type_options" id="normal">
+                <label for="normal"> Normal </label>
+
+            </div>
+        </div>
+        <div class="targeted_concerns_filter">
+            <h4 class="expandable_title"> Targeted concerns <span class="arrow"><i class="fa-solid fa-angle-down" id="targeted_concerns_arrow"></i></span></h4>
+            <div class="hidden_list" id="hidden_targeted_concerns_list">
+                <input type="checkbox" name="targeted_concerns_options" id="acne">
+                <label for="acne"> Acne </label>
+
+                <input type="checkbox" name="targeted_concerns_options" id="redness">
+                <label for="redness"> Redness </label>
+
+                <input type="checkbox" name="targeted_concerns_options" id="dark_spots">
+                <label for="dark_spots"> Dark Spots </label>
+
+                <input type="checkbox" name="targeted_concerns_options" id="aging">
+                <label for="aging"> Aging </label>
+
+                <input type="checkbox" name="targeted_concerns_options" id="dulness">
+                <label for="dulness"> Dulness </label>
+
+            </div>
+        </div>
+        <div class="ingredients_filter">
+            <h4 class="expandable_title"> Ingredients <span class="arrow"><i class="fa-solid fa-angle-down" id="ingredients_arrow"></i></span></h4>
+            <div class="hidden_list" id="hidden_ingredients_list">
+                <input type="checkbox" name="ingredients_options" id="niacinamide">
+                <label for="niacinamide"> Niacinamide </label>
+
+                <input type="checkbox" name="ingredients_options" id="hyaluronic_acid">
+                <label for="hyaluronic_acid"> Hyaluronic Acid </label>
+
+                <input type="checkbox" name="ingredients_options" id="salicylic_acid">
+                <label for="salicylic_acid"> Salicylic Acid </label>
+
+                <input type="checkbox" name="ingredients_options" id="retinol">
+                <label for="retinol"> Retinol </label>
+
+                <input type="checkbox" name="ingredients_options" id="vitamin_c">
+                <label for="vitamin_c"> Vitamin C </label>
+
+                <input type="checkbox" name="ingredients_options" id="ceramides">
+                <label for="ceramides"> Ceramides </label>
+
+                <input type="checkbox" name="ingredients_options" id="glycolic_acid">
+                <label for="glycolic_acid"> Glycolic Acid </label>
+
+                <input type="checkbox" name="ingredients_options" id="zinc_oxide">
+                <label for="zinc_oxide"> Zinc Oxide </label>
+
+                <input type="checkbox" name="ingredients_options" id="tea_tree_oil">
+                <label for="tea_tree_oil"> Tea Tree Oil </label>
+
+                <input type="checkbox" name="ingredients_options" id="aloe_vera">
+                <label for="aloe_vera"> Aloe Vera </label>
+
+            </div>
+        </div>
+        <div class="filter_button_container">
+            <button class="filter_button" type="submit"> Filter </button>
+        </div>
+    </form>
+</nav>
+{% endblock %}
