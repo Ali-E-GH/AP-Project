@@ -74,3 +74,27 @@ class PlanChoices(models.TextChoices):
     FULL = 'full', 'Full Plan'
     HYDRATION = 'hydration', 'Hydration'
     MINIMALIST = 'minimalist', 'Minimalist'
+
+class AgeGroupChoices(models.TextChoices):
+    UNDER_20 = 'under_20', 'Under 20 years old'
+    BETWEEN_20_30 = '20_30', '20 to 30 years'
+    BETWEEN_30_40 = '30_40', '30 to 40 years'
+    OVER_40 = 'over_40', 'Over 40 years old'
+
+class LifeStyleChoices(models.TextChoices):
+    MINIMAL = 'minimal', 'Short time (maximum 3 steps)'
+    FULL = 'full', 'Desire for a complete routine (+5 steps)'
+    HYDRATION = 'hydration', 'Focus on water supply'
+    ANTI_AGING = 'anti_aging', 'Focus on anti-aging'
+
+class BudgetChoices(models.TextChoices):
+    LOW = 'low', 'Under 25$'
+    MEDIUM = 'medium', '25$ to 100$'
+    HIGH = 'high', '100$ to 500$'
+    PREMIUM = 'premium', 'Over 500$'
+
+class QuestionTypeChoices(models.TextChoices):
+    TEXT = 'text', 'Text Answer'
+    SINGLE_CHOICE = 'single_choice', 'Single Choice'
+    MULTIPLE_CHOICE = 'multiple_choice', 'Multiple Choice'
+    SLIDER = 'slider', 'Slider Scale'

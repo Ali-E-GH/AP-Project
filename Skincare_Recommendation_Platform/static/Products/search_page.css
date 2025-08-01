@@ -192,7 +192,7 @@ a {
 nav {
   grid-area: filter;
   background-color: var(--background);
-  border-right: 1px solid var(--border);
+  /* border-right: 1px solid var(--border); */
   border-radius: 15px 15px 0 0;
   display: flex;
   flex-direction: column;
@@ -264,11 +264,6 @@ nav span{
   display: none;
 }
 
-#price-slider .noUi-connect,
-#price-slider .noUi-handle {
-  transition: none !important;
-  -webkit-transition: none !important; /* for Safari */
-}
 
 /* Hover effect */
 #price-slider .noUi-handle:hover, #rating-slider .noUi-handle:hover{
@@ -335,6 +330,7 @@ nav form input:-webkit-autofill:focus{
 .arrow{
   margin-right: 10px;
   font-size: 20px;
+  color: var(--secondary);
 }
 .arrow:hover{
   color: var(--primary);

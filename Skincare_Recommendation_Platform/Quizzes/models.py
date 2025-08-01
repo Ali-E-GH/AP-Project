@@ -1,33 +1,12 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from Users.models import User
-from Choices.models import SkinTypeChoices, SkinConcernsChoices, PreferenceChoices, QuestionChoices
+from Choices.models import SkinTypeChoices, SkinConcernsChoices, PreferenceChoices, QuestionChoices, AgeGroupChoices, LifeStyleChoices, QuestionTypeChoices
 # Create your models here.
 
 class QuizResults(models.Model):
-    AGE_GROUPS = [
-        ('under_20', 'Under 20 years old'),
-        ('20_30', '20 to 30 years'),
-        ('30_40', '30 to 40 years'),
-        ('over_40', 'Over 40 years old')
-    ]
-    
-    LIFESTYLE_CHOICES = [
-        ('minimal', 'Short time (maximum 3 steps)'),
-        ('full', 'Desire for a complete routine (+5 steps)'),
-        ('hydration', 'Focus on water supply'),
-        ('anti_aging', 'Focus on anti-aging')
-    ]
-    
-    BUDGET_CHOICES = [
-        ('low', 'Under 5$'),
-        ('medium', '5$ to 15$'),
-        ('high', '15$ to 25$'),
-        ('premium', 'Over 25$')
-    ]
-
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    age_group = models.CharField(max_length=50, choices=AGE_GROUPS, default='20_30')
+    age_group = models.CharField(max_length=50, choices=AgeGroupChoices.choices, default='20_30')
     skin_type = models.CharField(max_length=50, choices=SkinTypeChoices.choices)
     concerns = ArrayField(
         models.CharField(max_length=30, choices=SkinConcernsChoices.choices),
@@ -41,7 +20,7 @@ class QuizResults(models.Model):
     )
     budget_range_min = models.DecimalField(max_digits=8, decimal_places=2, null=True)
     budget_range_max = models.DecimalField(max_digits=8, decimal_places=2, null=True)
-    lifestyle = models.CharField(max_length=50, choices=LIFESTYLE_CHOICES, default='minimal')
+    lifestyle = models.CharField(max_length=50, choices=LifeStyleChoices.choices, default='minimal')
     skin_image = models.ImageField(upload_to='skin_analysis/', null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -49,12 +28,6 @@ class QuizResults(models.Model):
         return f"Quiz result for {self.user.username}"
     
 class Question(models.Model):
-    QUESTION_TYPES = [
-    ('text', 'Text Answer'),
-    ('single_choice', 'Single Choice'),
-    ('multiple_choice', 'Multiple Choice'),
-    ('slider', 'Slider Scale'),
-    ]
     # QUESTION_NAME = [
     #     ('skin_type', 'Skin'), 
     #     ('concerns', 'Concerns'),
@@ -67,7 +40,7 @@ class Question(models.Model):
     question = models.CharField(max_length=255)
     type = models.CharField(
         max_length=255, 
-        choices=QUESTION_TYPES,
+        choices=QuestionTypeChoices.choices,
         default='single_choice')
     options = ArrayField(
         models.CharField(max_length=100),
