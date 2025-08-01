@@ -39,8 +39,8 @@ class QuizResults(models.Model):
         default=list,
         blank=True
     )
-    budget_range_min = models.DecimalField(max_digits=8, decimal_places=2)
-    budget_range_max = models.DecimalField(max_digits=8, decimal_places=2)
+    budget_range_min = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+    budget_range_max = models.DecimalField(max_digits=8, decimal_places=2, null=True)
     lifestyle = models.CharField(max_length=50, choices=LIFESTYLE_CHOICES, default='minimal')
     skin_image = models.ImageField(upload_to='skin_analysis/', null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)

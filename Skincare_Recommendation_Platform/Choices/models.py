@@ -70,3 +70,7 @@ class QuestionChoices(models.TextChoices):
     MULTIPLECHOICE = 'multiple_choice', 'Multiple Choice'
     SLIDER = 'slider', 'Slider'
 
+class PlanChoices(models.TextChoices):
+    FULL = 'full', 'Full Plan'
+    HYDRATION = 'hydration', 'Hydration'
+    MINIMALIST = 'minimalist', 'Minimalist'
