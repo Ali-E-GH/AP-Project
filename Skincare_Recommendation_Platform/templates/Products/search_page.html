@@ -45,9 +45,10 @@
 
 </section>
 <nav>
+    <span class="arrow"><i class="fa-solid fa-bars" id="nav_arrow_closed"></i></span>
     <form action="." method="get" id="filter_form">
         {% csrf_token %}
-        <h2 class="filter_title">Filters</h2>
+        <h2 class="filter_title">Filters <span class="arrow"><i class="fa-solid fa-angle-left" id="nav_arrow"></i></span></h2>
         <div class="brand_filter">
             <h4 class="brand_filter_label"> Brand </h4>
             <input name="brand_filter" type="text" class="brand_filter_input">

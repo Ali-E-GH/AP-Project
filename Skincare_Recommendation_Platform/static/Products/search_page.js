@@ -108,4 +108,20 @@ document.addEventListener('DOMContentLoaded', function(){
     filter_button.addEventListener('click', submitValues);
     search_button.addEventListener('click', submitValues);
 
+    const nav_arrow = document.getElementById('nav_arrow');
+    const nav_arrow_closed = document.getElementById('nav_arrow_closed');
+    nav_arrow.addEventListener('click', function(){
+        document.getElementsByTagName('body')[0].classList.add('nav_closed');
+        document.getElementById('filter_form').style.display = 'none';
+        document.getElementsByTagName('nav')[0].classList.add('closed');
+        nav_arrow_closed.style.display = 'block';
+    });
+
+    nav_arrow_closed.addEventListener('click', function(){
+        document.getElementsByTagName('body')[0].classList.remove('nav_closed');
+        document.getElementById('filter_form').style.display = 'block';
+        document.getElementsByTagName('nav')[0].classList.remove('closed');
+        nav_arrow_closed.style.display = 'none';
+    })
+
 })

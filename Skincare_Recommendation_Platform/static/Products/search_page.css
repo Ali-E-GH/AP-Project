@@ -13,6 +13,9 @@ body {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
 }
+body.nav_closed{
+  grid-template-columns: 50px 1fr;
+}
 /* header {
   grid-area: header;
   background-color: var(--background);
@@ -200,15 +203,25 @@ nav {
   margin-top: 1px;
   transition: none !important;
 }
+nav.closed{
+  /* border-radius: 15px; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 8px;
+  padding-top: 20px;
+}
 
 nav form{
-  width: 90%;
+  width: 87%;
 }
 
 nav h2{
   color: var(--text);
   border-bottom: 2px solid var(--border);
   padding-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
 }
 
 nav span{
@@ -409,4 +422,8 @@ input[type="checkbox"]:checked + label:hover{
 }
 span{
   transition: none !important;
+}
+
+#nav_arrow_closed{
+  display: none;
 }
