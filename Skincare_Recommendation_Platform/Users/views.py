@@ -58,19 +58,21 @@ def LoginUser(request):
     is_empty = False
     is_wrong = False
 
-    if request.method == "POST":
+    if(request.method == "POST"):
         username = request.POST.get('username')
         password = request.POST.get('password')
         next_url = request.POST.get('next')  # Check POST first
 
-        if username == '' or password == '':
+        if(username == '' or password == ''):
             is_empty = True
             return render(request, 'Users/Login.html', {'is_empty': is_empty, 'is_wrong': is_wrong, 'next': next_url})
 
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if(user is not None):
             login(request, user)
-            if next_url:
+            if not(Cart.objects.filter(user=user).exists()):
+                Cart.objects.create(user=user)
+            if(next_url):
                 return redirect(next_url)
             return redirect("home_page")
         else:
@@ -90,9 +92,7 @@ def LogoutUser(request):
 def AddToCart(request):
     if not(request.user.is_authenticated):
         return JsonResponse({'redirect_url': '/user/login/'}, status=401)
-    if not(request.user.cart):
-        Cart.objects.create(user=request.user)
-        
+
     data = json.loads(request.body)
 
     product_id = data.get('product_id')
@@ -113,11 +113,8 @@ def AddToCart(request):
 
 @login_required
 def CartPage(request):
-    if(request.user.cart):
-        cart = request.user.cart
-        cart_items = cart.items.all()
-    else:
-        Cart.objects.create(user=request.user)
+    cart = request.user.cart
+    cart_items = cart.items.all()
 
     return render(request, 'Users/cart_page.html', {'items': cart_items, 'cart':cart})
 
