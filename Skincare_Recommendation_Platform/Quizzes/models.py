@@ -28,14 +28,6 @@ class QuizResults(models.Model):
         return f"Quiz result for {self.user.username}"
     
 class Question(models.Model):
-    # QUESTION_NAME = [
-    #     ('skin_type', 'Skin'), 
-    #     ('concerns', 'Concerns'),
-    #     ('preferences', 'Preferences'),
-    #     ('timestamp', 'Timestamp'),
-    #     ('budget', 'Budget'),
-    # ]
-    # question_name = models.CharField(max_length=255, default='Your Question', choices=QUESTION_NAME)
     order = models.PositiveIntegerField(default=0)
     question = models.CharField(max_length=255)
     type = models.CharField(
@@ -47,9 +39,10 @@ class Question(models.Model):
         null=True,
         blank=True
     )
-    # created_date = models.DateTimeField(auto_now_add=True)
-    # class Meta:
-    #     ordering = ['-created_date']
-        
+    # question_length = models.CharField(
+    #     max_length=255,
+    #     choices=[('short', 'Short'), ('long', 'Long')],
+    #     default='short',
+    # )
     def __str__(self):
-        return self.question
+        return f'{self.order}.{self.question}'
