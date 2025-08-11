@@ -9,7 +9,7 @@ from Choices.models import IngredientsChoices, SkinTypeChoices, SkinConcernsChoi
 # Create your models here.
 
 class Product(models.Model):
-
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length= 255)
     brand = models.CharField(max_length= 255)
     price = models.DecimalField(max_digits=8, decimal_places=2)
@@ -45,6 +45,10 @@ class Product(models.Model):
     @property
     def rating(self):
         return round(mean(self.ratings), 1)
+    
+    def __str__(self):
+        return self.name
+
 
 # class ProductForm(forms.ModelForm):
 #     class Meta:

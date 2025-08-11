@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
                 ('question', models.CharField(max_length=255)),
                 ('type', models.CharField(choices=[('multiple_choice', 'Multiple Choice'), ('slider', 'Slider')], max_length=255)),
                 ('options', django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=255), blank=True, null=True, size=None)),
+                ('question_length', models.CharField(choices=[('short', 'Short'), ('long', 'Long')], max_length=255))
             ],
         ),
     ]

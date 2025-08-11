@@ -28,7 +28,7 @@ def ProductPage(request, id):
     return render(request, 'Products/product_page.html', {
         'product': product,
         'ingredients':ingredients,
-        'last_ingredient': ingredients[-1],
+        'last_ingredient':ingredients[-1] if ingredients else None,
         'rating': product.rating,
         'liked': already_liked,
         'views':Browsing_History.objects.filter(product=product, interaction_type='view').count(),

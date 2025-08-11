@@ -7,7 +7,7 @@ from .forms import QuizForm
 from .models import Question
 # Create your views here.
 def QuizPage(request):
-    questions = Question.objects.all()
+    questions = Question.objects.all().order_by('order')
     answers = {}
     if(request.method == 'POST'):
         for question in questions:
