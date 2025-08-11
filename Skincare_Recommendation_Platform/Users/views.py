@@ -90,7 +90,9 @@ def LogoutUser(request):
 def AddToCart(request):
     if not(request.user.is_authenticated):
         return JsonResponse({'redirect_url': '/user/login/'}, status=401)
-
+    if not(request.user.cart):
+        Cart.objects.create(user=request.user)
+        
     data = json.loads(request.body)
 
     product_id = data.get('product_id')
@@ -111,8 +113,12 @@ def AddToCart(request):
 
 @login_required
 def CartPage(request):
-    cart = request.user.cart
-    cart_items = cart.items.all()
+    if(request.user.cart):
+        cart = request.user.cart
+        cart_items = cart.items.all()
+    else:
+        Cart.objects.create(user=request.user)
+
     return render(request, 'Users/cart_page.html', {'items': cart_items, 'cart':cart})
 
 @login_required
