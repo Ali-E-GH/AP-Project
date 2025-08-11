@@ -39,7 +39,5 @@ class Question(models.Model):
         null=True,
         blank=True
     )
-    select_limit=models.PositiveIntegerField(default=1)
-
     def __str__(self):
         return f'{self.order}.{self.question}'
