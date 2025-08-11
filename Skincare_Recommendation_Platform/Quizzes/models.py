@@ -39,10 +39,7 @@ class Question(models.Model):
         null=True,
         blank=True
     )
-    # question_length = models.CharField(
-    #     max_length=255,
-    #     choices=[('short', 'Short'), ('long', 'Long')],
-    #     default='short',
-    # )
+    select_limit=models.PositiveIntegerField(default=1)
+
     def __str__(self):
         return f'{self.order}.{self.question}'

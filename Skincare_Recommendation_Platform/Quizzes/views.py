@@ -19,5 +19,6 @@ def QuizPage(request):
             else:
                 answer = request.POST.get(key)
             answers[question.id] = answer # type: ignore
+    question_ids = [question.id for question in questions] # type: ignore
 
-    return render(request, 'Quizzes/quiz_page.html', {'questions': questions})
+    return render(request, 'Quizzes/quiz_page.html', {'questions': questions, 'question_ids':question_ids})

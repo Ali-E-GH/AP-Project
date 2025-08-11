@@ -3,6 +3,7 @@
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'variables.css' %}"> 
     <link rel="stylesheet" href="{% static 'Quizzes/quiz_page.css' %}">
+    <script src="{% static 'Quizzes/quiz_page.js' %}"></script>
 {% endblock %}
 {% block title %}
     Quiz
@@ -10,31 +11,31 @@
 {% block content %}
     {% block header %}
     {% endblock %}
-    <div class="quiz_container">
+    <div class="quiz_container" id="quiz_container" data-question_ids="{{ question_ids }}">
         <h2>Quiz</h2>
         <form method="post" action=".">
             {% csrf_token %}
             {% for question in questions %}
             <div class="q_container">
-                <h3>{{ question.question }}</h3>
+                <h3>{{ question.question }} <span class="arrow"><i class="fa-solid fa-angle-down" id="question_{{question.id}}_arrow"></i></span></h3>
                 {% if question.type == 'multiple_choice'%}
-                    <div class="options">
+                    <div class="options" id="question_{{ question.id }}_options">
                         {% for option in question.options %}
-                            <input type="checkbox" name="question_{{ question.id }}" id="{{option}}" value="{{ option }}">
+                            <input type="checkbox" name="question_{{ question.id }}" id="{{option}}" class="question_{{ question.id }}" value="{{ option }}" data-q_type="{{ question.type }}">
                             <label for="{{option}}">{{ option }}</label>
                         {% endfor %}
                     </div>
                 {% elif question.type == 'single_choice'%}
-                    <div class="options">
+                    <div class="options"  id="question_{{ question.id }}_options">
                         {% for option in question.options %}
-                            <input type="checkbox" name="question_{{ question.id }}" id="{{option}}" value="{{ option }}">
+                            <input type="checkbox" name="question_{{ question.id }}" id="{{option}}" class="question_{{ question.id }}" value="{{ option }}" data-q_type="{{ question.type }}">
                             <label for="{{option}}">{{ option }}</label>
                         {% endfor %}
                     </div>
                 {% else %}
-                    <div class="slider">
+                    <div class="slider"  id="question_{{ question.id }}_options">
                         <output class="slider-value">5</output>
-                        <input name="question_{{ question.id }}" type="range" min="1" max="10" value="5" oninput="this.previousElementSibling.textContent = this.value">
+                        <input name="question_{{ question.id }}" type="range" min="1" max="10" value="5" oninput="this.previousElementSibling.textContent = this.value" data-q_type="{{ question.type }}" class="question_{{ question.id }}">
                         <div class="slider_fill"></div>
                     </div>
                 {% endif %}

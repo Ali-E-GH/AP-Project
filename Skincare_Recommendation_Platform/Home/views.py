@@ -21,19 +21,19 @@ def HomePage(request):
 
     if query:
 
-    vector = (
-        SearchVector('name', weight='A') +
-        SearchVector('brand', weight='A') +
-        SearchVector('category', weight='A') +
-        SearchVector('description', weight='B') +
-        SearchVector('compatible_skin_types', weight='B') +
-        SearchVector('rating', weight='B') +
-        SearchVector('tags', weight='C')
-    )
+        vector = (
+            SearchVector('name', weight='A') +
+            SearchVector('brand', weight='A') +
+            SearchVector('category', weight='A') +
+            SearchVector('description', weight='B') +
+            SearchVector('compatible_skin_types', weight='B') +
+            SearchVector('rating', weight='B') +
+            SearchVector('tags', weight='C')
+        )
 
-    search_query = SearchQuery(query)
+        search_query = SearchQuery(query)
 
-    products = (Product.objects.annotate(rank=SearchRank(vector, search_query)).filter(rank__gte=0.1) .order_by('-rank').select_related('category'))
+        products = (Product.objects.annotate(rank=SearchRank(vector, search_query)).filter(rank__gte=0.1) .order_by('-rank').select_related('category'))
 
 
     if not products.exists():
