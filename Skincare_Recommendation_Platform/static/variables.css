@@ -1,35 +1,39 @@
 :root {
   --background: #ffffff;
   --surface: #eeeeee;
-  --primary: #007bff;
+  --primary: rgb(160,0,0);
   --secondary: #575f66;
   --text: #212529;
   --text-muted: #6c757d;
   --border: #dee2e6;
-  --link: #004dc0;
+  --link: rgb(200,0,0);
   --success: #198754;
   --warning: #ffc107;
   --danger: #dc3545;
   --text-on-primary: #ffffff;
   --clicked-surface: #dfdbdb;
   --shadow: rgba(0, 0, 0, 0.2);
-  --shadow-focus: rgba(0, 0, 0, 0.25);
+  --shadow-focus: rgba(0, 0, 0, 0.3);
+  --darker-shadow: rgba(0, 0, 0, 0.25);
+  --background-image: url(../images/bg_light.png);
 }
 
 body.dark-mode {
   --background: #121212;
   --surface: #1e1e1e;
-  --primary: #4a88ba;
+  --primary: rgb(160, 40, 40);
   --secondary: #9ba1a8;
   --text: #cecfcf;
   --text-muted: #adb3b9;
   --border: #2c2f33;
-  --link: #156cc2;
+  --link: rgb(200, 40, 40);
   --success: #51cf66;
   --warning: #ffd43b;
   --danger: #ff6b6b;
   --text-on-primary: #ffffffbd;
   --clicked-surface: #292929;
-  --shadow-focus: rgba(80, 80, 80, 0.4);
+  --shadow-focus: rgba(100, 100, 100, 0.3);
+  --darker-shadow: rgba(80, 80, 80, 0.3);
   --shadow: rgba(80, 80, 80, 0.2);
+  --background-image: url(../images/bg_dark.png);
 }

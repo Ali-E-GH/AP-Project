@@ -38,7 +38,7 @@ form{
     padding-top: 1%;
 }
 form button{
-    width: 80%;
+    width: 60%;
     margin: 1%;
     height: 70px;
     border: none;
@@ -46,7 +46,6 @@ form button{
 form button{
     background-color: var(--primary);
     border-radius: 5px;
-    width: 25%;
     font-size: 1.2em;
     display: flex;
     align-items: center;

@@ -10,7 +10,52 @@
 
 {% block content %}
 <section>
-    {% for product in products %}
+
+    <h2 class="get_started">Get Started</h2>
+    <div class="options">
+        <div class="quiz_option option">
+            <a href="/quiz">
+                <h3>
+                    Quiz
+                </h3>
+                <p>
+                    Take this quiz and complete your information
+                </p>
+            </a>
+        </div>
+        <div class="routine_option option">
+            <a href="/routines">
+                <h3>
+                    Routine
+                </h3>
+                <p>
+                    Get your personal routine ( quiz required )
+                </p>
+            </a>
+        </div>
+        <div class="for_you option">
+            <a href="">
+                <h3>
+                    For You
+                </h3>
+                <p>
+                    Recommended products for your liking
+                </p>
+            </a>
+        </div>
+        <div class="all_products option">
+            <a href="/product/search/">
+                <h3>
+                    Shop now!
+                </h3>
+                <p>
+                    See all of our products
+                </p>
+            </a>
+        </div>
+    </div>
+
+    <!-- {% for product in products %}
         <div class="product_container">
             <a href="{% url 'product_page' product.id %}">
                 <div class="product_image_container">
@@ -38,7 +83,7 @@
                 </div>
             </a>
         </div>
-    {% endfor %}
+    {% endfor %} -->
 </section>
 {% endblock %}
 
