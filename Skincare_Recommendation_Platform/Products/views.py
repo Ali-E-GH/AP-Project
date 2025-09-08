@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from statistics import mean
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+from django.db.models import Q, TextField
+from django.db.models.functions import Cast
 
 from .models import Product
 from History.models import Browsing_History
@@ -21,7 +24,11 @@ def ProductPage(request, id):
         already_liked = False
 
     if(request.POST.get('user_rating')):
-        product.ratings.append(float(request.POST.get('user_rating')))
+        ratings = product.ratings
+        ratings.append(float(request.POST.get('user_rating')))
+        product.ratings = ratings
+        product.save()
+
 
 
 
@@ -36,11 +43,43 @@ def ProductPage(request, id):
 
 def SearchPage(request):
     if(request.method == 'POST'):
-        searched_phrase = request.POST.get('search')
-        # rest here
+        query = request.POST.get('search', '').strip()
         products = Product.objects.all()
+
+        if query:
+            vector = (
+                SearchVector('name', weight='A') +
+                SearchVector('brand', weight='A') +
+                SearchVector('category', weight='A') +
+                SearchVector('description', weight='B') +
+                SearchVector(Cast('compatible_skin_types', TextField()), weight='B') +
+                SearchVector(Cast('concerns_targeted', TextField()), weight='B') +
+                SearchVector(Cast('ingredients', TextField()), weight='B') +
+                SearchVector(Cast('tags', TextField()), weight='C') +
+                SearchVector('rating_avg', weight='B')
+            )
+
+            search_query = SearchQuery(query)
+
+            products = (
+                Product.objects.annotate(rank=SearchRank(vector, search_query))
+                .filter(rank__gte=0.1)
+                .order_by('-rank')
+            )
+
+            if not products.exists():
+                products = Product.objects.filter(
+                    Q(name__icontains=query) |
+                    Q(brand__icontains=query) |
+                    Q(category__icontains=query) |
+                    Q(description__icontains=query) |
+                    Q(compatible_skin_types__icontains=query) |
+                    Q(concerns_targeted__icontains=query) |
+                    Q(ingredients__icontains=query) |
+                    Q(tags__icontains=query)
+                )
+
     elif(request.method == 'GET'):
-        searched_phrase = request.GET.get('searched_phrase')
         brand_name = request.GET.get('brand_filter')
         min_price = request.GET.get('min_price')
         max_price = request.GET.get('max_price')
@@ -51,11 +90,66 @@ def SearchPage(request):
         concerns = request.GET.getlist('targeted_concerns_options')
         ingredients = request.GET.getlist('ingredients_options')
         #rest here
-    else:
+        query = request.GET.get('searched_phrase', '').strip()
         products = Product.objects.all()
-    products = Product.objects.all()
+
+        if query:
+            vector = (
+                SearchVector('name', weight='A') +
+                SearchVector('brand', weight='A') +
+                SearchVector('category', weight='A') +
+                SearchVector('description', weight='B') +
+                SearchVector(Cast('compatible_skin_types', TextField()), weight='B') +
+                SearchVector(Cast('concerns_targeted', TextField()), weight='B') +
+                SearchVector(Cast('ingredients', TextField()), weight='B') +
+                SearchVector(Cast('tags', TextField()), weight='C') +
+                SearchVector('rating_avg', weight='B')
+            )
+
+            search_query = SearchQuery(query)
+
+            products = (
+                Product.objects.annotate(rank=SearchRank(vector, search_query))
+                .filter(rank__gte=0.1)
+                .order_by('-rank')
+            )
+
+            if not products.exists():
+                products = Product.objects.filter(
+                    Q(name__icontains=query) |
+                    Q(brand__icontains=query) |
+                    Q(category__icontains=query) |
+                    Q(description__icontains=query) |
+                    Q(compatible_skin_types__icontains=query) |
+                    Q(concerns_targeted__icontains=query) |
+                    Q(ingredients__icontains=query) |
+                    Q(tags__icontains=query)
+                )
+        if(brand_name):
+            products = products.filter(brand=brand_name)
+        if(category):
+            products = products.filter(category=category)
+        if(skin_types):
+            products = products.filter(compatible_skin_types__overlap=skin_types)
+        if(concerns):
+            products = products.filter(concerns_targeted__overlap=concerns)
+        if(ingredients):
+            products = products.filter(ingredients__overlap=ingredients)
+        if(min_price and max_price):
+            products = products.filter(price__gte=min_price, price__lte=max_price)
+        elif(min_price):
+            products = products.filter(price__gte=min_price)
+        elif(max_price):
+            products = products.filter(price__lte=max_price)
+        if(min_rating and max_rating):
+            products = products.filter(rating_avg__gte=min_rating, rating_avg__lte=max_rating)
+        elif(min_rating):
+            products = products.filter(rating_avg__gte=min_rating)
+        elif(max_rating):
+            products = products.filter(rating_avg__lte=max_rating)
 
 
     return render(request, 'Products/search_page.html', {
         'products': products,
+        'searched': query
     })

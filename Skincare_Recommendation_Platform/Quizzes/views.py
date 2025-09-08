@@ -24,6 +24,7 @@ def QuizPage(request):
             if(value == []):
                 empty = True
         if( empty == False ):
+            
             return redirect('/routines')
 
     question_ids = [question.id for question in questions] # type: ignore

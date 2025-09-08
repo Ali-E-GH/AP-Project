@@ -20,6 +20,7 @@ class Product(models.Model):
         default=list,
         blank=True,
     )
+    rating_avg = models.FloatField(default=0.0)
     compatible_skin_types = ArrayField(
         models.CharField(max_length=30, choices=SkinTypeChoices.choices),
         default=list,
@@ -45,6 +46,13 @@ class Product(models.Model):
     @property
     def rating(self):
         return round(mean(self.ratings), 1)
+    
+    def save(self, *args, **kwargs):
+        if(self.ratings):  # only if list is not empty
+            self.rating_avg = round(mean(self.ratings), 1)
+        else:
+            self.rating_avg = 0.0
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return self.name

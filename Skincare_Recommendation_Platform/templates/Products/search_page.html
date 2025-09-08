@@ -165,7 +165,7 @@
         <div class="filter_button_container">
             <button class="filter_button" id="filter_button" type="button"> Filter </button>
         </div>
-        <input type="hidden" name="searched_phrase" id="search_input">
+        <input type="hidden" name="searched_phrase" id="search_input" value="{{ request.GET.searched_phrase }}">
     </form>
 </nav>
 {% endblock %}

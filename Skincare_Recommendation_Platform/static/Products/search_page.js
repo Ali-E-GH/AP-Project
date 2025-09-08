@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
     const priceSlider = document.getElementById('price-slider');
 
-    if (!priceSlider) return; // Prevent error if slider is missing
+    if (!priceSlider) return;
 
     noUiSlider.create(priceSlider, {
         start: [0, 2500],
@@ -99,7 +99,10 @@ document.addEventListener('DOMContentLoaded', function(){
     function submitValues() {
         var searched_phrase = document.getElementById('search_bar').value;
         const filter_form = document.getElementById('filter_form');
-        document.getElementById('search_input').value = searched_phrase;
+        if (searched_phrase != null) {
+            document.getElementById('search_input').value = searched_phrase;
+        }
+        // document.getElementById('search_input').value = searched_phrase;
         filter_form.submit();
     }
 
