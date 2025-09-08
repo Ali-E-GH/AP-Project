@@ -1,12 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from Quizzes.models import QuizResults
 from django.contrib.auth.decorators import login_required
 from Products.models import Product
 from Routines.models import RoutinePlan, RoutineStep
-
-def routine_home(request):
-    return HttpResponse("Welcome to routines page!")
 
 @login_required
 def routine_generator_view(request):
@@ -14,7 +11,7 @@ def routine_generator_view(request):
     try:
         quiz_data = QuizResults.objects.get(user=user)
     except QuizResults.DoesNotExist:
-        return render(request, 'routines/routine.html', {'error': 'Please complete the quiz first.'})
+        return redirect('quiz_page')
 
     # استخراج داده‌ها از quiz_data
     age = quiz_data.data.get('age')  # e.g., "20 to 30"
@@ -127,4 +124,4 @@ def routine_generator_view(request):
             product=product
         )
 
-    return render(request, 'routines/routine.html', {'routine_plan': plan})
+    return render(request, 'Routines/routine_page.html', {'routine_plan': plan})

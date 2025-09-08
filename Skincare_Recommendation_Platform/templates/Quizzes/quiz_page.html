@@ -13,6 +13,9 @@
     {% endblock %}
     <div class="quiz_container" id="quiz_container" data-question_ids="{{ question_ids }}">
         <h2>Quiz</h2>
+        {% if empty %}
+        <p style="color: red;"> all questions must be answered </p>
+        {% endif %}
         <form method="post" action=".">
             {% csrf_token %}
             {% for question in questions %}
