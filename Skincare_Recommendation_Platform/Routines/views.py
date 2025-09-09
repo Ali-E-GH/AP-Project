@@ -14,12 +14,18 @@ def routine_generator_view(request):
         return redirect('quiz_page')
 
     # استخراج داده‌ها از quiz_data
-    age = quiz_data.age  # e.g., "20 to 30"
-    preferences = quiz_data.preferences  # e.g., ["Vegan", "Fragrance-Free"]
-    skin_type = quiz_data.skin_type  # e.g., "Dry"
-    concerns = quiz_data.concerns  # max 3
-    budget = quiz_data.budget  # e.g., "50$ to 70$"
-    eye_concern = quiz_data.eye_concern  # e.g., "Dark Circles"
+    age = quiz_data.age  # S "Under 20","20 to 30","30 to 40","Over 40"
+
+    preferences = quiz_data.preferences  # M Vegan,Fragrance-Free,Cruelty-Free,Alcohol-Free,Non-Comedogenic
+
+    skin_type = quiz_data.skin_type  # S Oily,Dry,Combination,Sensitive,Normal
+
+    concerns = quiz_data.concerns  # M max 3 of Acne-Prone,Redness,"Dark Spots",Dullness,Hyperpigmentation,Oily/Blackheads,"Dryness & Dehydration","Early Signs of Aging","Mature Skin","Sensitive / Rosacea-prone"
+    
+    budget = quiz_data.budget  # S "Under 30$","30$ to 50$","50$ to 70$","Over 70$"
+    
+    eye_concern = quiz_data.eye_concern  # S "Drak Circles","Fine Lines & Wrinkles",Puffiness,"No Eye Concern"
+    
     dryness_level = quiz_data.dryness  # int from 0 to 10
 
     # تعیین نوع روتین پیشنهادی
@@ -35,26 +41,57 @@ def routine_generator_view(request):
 
     # تعیین مراحل روتین
     steps = []
-
+    step = 1
     # مرحله پاک‌کننده
     if skin_type == 'Oily':
         steps.append({
-            'order': 1,
+            'order': step,
             'description': 'Use a foaming cleanser to control oil',
             'product_name': 'Salicylic Acid Cleanser'
         })
+        step+=1
     elif skin_type == 'Dry':
-        steps.append({
-            'order': 1,
-            'description': 'Use a cream cleanser for hydration',
-            'product_name': 'Cream Cleanser'
-        })
+        if budget == 'Over 70$':
+            steps.append({
+                'order': step,
+                'description': 'Use a cream cleanser for hydration',
+                'product_name': 'Cream Cleanser'
+            })
+        else:
+            steps.append({
+                'order': step,
+                'description': 'Use a cream cleanser for hydration',
+                'product_name': 'Simple Gentle'
+            })
+        step+=1
     else:
-        steps.append({
-            'order': 1,
-            'description': 'Use a gentle daily cleanser',
-            'product_name': 'Gentle Cleanser'
-        })
+        if age == 'Over 40':
+            steps.append({
+                'order': step,
+                'description': 'Use a gentle daily cleanser',
+                'product_name': 'Gentle Cleanser'
+            })
+        elif age in ["Under 20","20 to 30"]:
+            steps.append({
+                'order': step,
+                'description': 'Use a gentle daily cleanser',
+                'product_name': 'Good Intent Glow Grind Cleansing Balm'
+            })
+        else:
+            if budget == 'Over 70$' and preferences in ['Vegan', 'Cruelty-Free']:
+                steps.append({
+                'order': step,
+                'description': 'Use a good cleanser',
+                'product_name': 'Glacier Foam'
+            })
+
+            else:
+                steps.append({
+                    'order': step,
+                    'description': 'Use a gentle daily cleanser',
+                    'product_name': 'Hydrating Cleanser'
+                })
+        step+=1
 
     # سرم متناسب با concern
     concern_serums = {
@@ -69,7 +106,7 @@ def routine_generator_view(request):
     for concern in concerns:
         if concern in concern_serums:
             steps.append({
-                'order': 2,
+                'order': step,
                 'description': f'Apply {concern_serums[concern]} to treat {concern.lower()}',
                 'product_name': concern_serums[concern]
             })
@@ -78,34 +115,44 @@ def routine_generator_view(request):
 
     if not serum_added:
         steps.append({
-            'order': 2,
+            'order': step,
             'description': 'Apply a basic hydrating serum',
             'product_name': 'Hyaluronic Acid Serum'
         })
+    step+=1
 
     # مرطوب‌کننده متناسب با سطح خشکی پوست
-    moisturizer_name = 'Oil-Free Moisturizer' if skin_type == 'Oily' else (
-        'Anti-Aging Moisturizer' if 'Aging' in ' '.join(concerns) else 'Glacier Cleanser')
-    steps.append({
-        'order': 3,
-        'description': 'Use a moisturizer to seal hydration',
-        'product_name': moisturizer_name
-    })
+    if budget in ["50$ to 70$","Over 70$"]:
+        moisturizer_name = 'Oil-Free Moisturizer' if skin_type == 'Oily' else ('Anti-Aging Moisturizer' if 'Aging' in ' '.join(concerns) else 'Glacier Cleanser')
+        steps.append({
+            'order': step,
+            'description': 'Use a moisturizer to seal hydration',
+            'product_name': moisturizer_name
+        })
+        step+=1
 
     # ضدآفتاب اجباری برای انواع پوست
     steps.append({
-        'order': 4,
+        'order': step,
         'description': 'Apply sunscreen with SPF 50 every morning',
         'product_name': 'SPF 50 Sunscreen'
     })
+    step+=1
 
     # کرم دور چشم در صورت نیاز
     if eye_concern != 'No Eye Concern':
-        steps.append({
-            'order': 5,
-            'description': f'Use an eye cream for {eye_concern.lower()}',
-            'product_name': f'{eye_concern} Eye Cream'  # فرض بر این که در دیتابیس هست
-        })
+        if budget in ["30$ to 50$","50$ to 70$"]:
+            steps.append({
+                'order': step,
+                'description': f'Use an eye cream for {eye_concern.lower()}',
+                'product_name': f'De-Bloat Soothing Eye Cream'
+            })
+        elif budget == "Over 70$":
+            steps.append({
+                'order': step,
+                'description': f'Use an eye cream for {eye_concern.lower()}',
+                'product_name': f'Black Rice Bakuchiol Eye Cream'
+            })
 
     # ایجاد یا جایگزینی روتین در دیتابیس
     plan, _ = RoutinePlan.objects.get_or_create(user=user, name=routine_name)
