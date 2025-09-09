@@ -106,7 +106,8 @@ def AddToCart(request):
         cart_item.save(update_fields=['quantity'])
     else:
         cart_item = CartItem.objects.create(cart=request.user.cart, product=product, quantity=quantity)
-        Browsing_History.objects.create(user=request.user, product=product, interaction_type='cart')
+        for _ in range(quantity):
+            Browsing_History.objects.create(user=request.user, product=product, interaction_type='cart')
         
 
     return JsonResponse({'success': True})

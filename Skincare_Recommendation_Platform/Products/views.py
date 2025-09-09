@@ -1,16 +1,21 @@
 from django.shortcuts import render, get_object_or_404
 from statistics import mean
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from django.db.models import Q, TextField
+from django.db.models import Q, TextField, Case, When
+from collections import defaultdict
 from django.db.models.functions import Cast
 
 from .models import Product
-from History.models import Browsing_History
+from History.models import Browsing_History, Purchase_History
+from Quizzes.models import QuizResults
 # Create your views here.
 
-def SearchProducts(request):
-    pass
-
+INTERACTION_WEIGHTS = {
+    "view": 1,
+    "like": 2,
+    "cart": 3,
+    "purchase": 5,
+}
 
 def ProductPage(request, id):
     product = get_object_or_404(Product, id=id)
@@ -40,6 +45,60 @@ def ProductPage(request, id):
         'liked': already_liked,
         'views':Browsing_History.objects.filter(product=product, interaction_type='view').count(),
     })
+
+def score_products(user, limit=10):
+
+    scores = defaultdict(float)
+
+    quiz = QuizResults.objects.filter(user=user)
+    if(quiz):
+        budget_ranges = {
+            "low": (0, 25),
+            "medium": (25, 100),
+            "high": (100, 500),
+            "premium": (500, 10000),
+        }
+        min_price, max_price = budget_ranges.get(quiz.budget, (0, 10000))
+
+        candidate_products = Product.objects.filter(price__gte=min_price, price__lte=max_price)
+
+        for product in candidate_products:
+            score = 0
+
+            if(quiz.skin_type in product.compatible_skin_types):
+                score += 3
+
+            concern_matches = set(quiz.concerns) & set(product.concerns_targeted)
+            score += 2 * len(concern_matches)
+
+            preference_matches = set(quiz.preferences) & set(product.ingredients)
+            score += 1 * len(preference_matches)
+
+            if(quiz.eye_concern != "no_eye_concern" and "eye" in product.category.lower()):
+                score += 2
+
+            score += product.rating_avg
+
+            if(score > 0):
+                scores[product.id] += score
+
+    browsed = Browsing_History.objects.filter(user=user)
+    purchased = Purchase_History.objects.filter(user=user)
+
+    for entry in browsed:
+        scores[entry.product.id] += INTERACTION_WEIGHTS.get(entry.interaction_type, 0)
+
+    for entry in purchased:
+        scores[entry.product.id] += INTERACTION_WEIGHTS["purchase"] * entry.quantity
+
+    if(scores):
+        sorted_products = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+        product_ids = [pid for pid, _ in sorted_products[:limit]]
+
+        preserved_order = Case(*[When(id=pid, then=pos) for pos, pid in enumerate(product_ids)])
+        return Product.objects.filter(id__in=product_ids).order_by(preserved_order)
+
+    return Product.objects.all().order_by("-rating_avg")[:limit]
 
 def SearchPage(request):
     if(request.method == 'POST'):
@@ -78,6 +137,9 @@ def SearchPage(request):
                     Q(ingredients__icontains=query) |
                     Q(tags__icontains=query)
                 )
+        else:
+            products = score_products(request.user, limit=10)
+
 
     elif(request.method == 'GET'):
         brand_name = request.GET.get('brand_filter')

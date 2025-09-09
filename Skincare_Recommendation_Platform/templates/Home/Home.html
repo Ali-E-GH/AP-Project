@@ -6,6 +6,7 @@
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'variables.css' %}">
     <link rel="stylesheet" href="{% static 'Home/Home.css' %}">
+    <script src="{% static 'Home/Home.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -33,15 +34,18 @@
                 </p>
             </a>
         </div>
-        <div class="for_you option">
-            <a href="">
+        <form action="/product/search/" method="post" id="for_you_form" style="display: none;">
+            {% csrf_token %}
+        </form>
+        <div class="for_you option" id="for_you">
+            <div class="for_you_replacement" id="for_you_replacement">
                 <h3>
                     For You
                 </h3>
                 <p>
                     Recommended products for your liking
                 </p>
-            </a>
+            </div>
         </div>
         <div class="all_products option">
             <a href="/product/search/">
