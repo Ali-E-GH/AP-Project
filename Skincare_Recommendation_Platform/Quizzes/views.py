@@ -16,7 +16,7 @@ def QuizPage(request):
             if(question.type == 'multiple_choice'):
                 answer = request.POST.getlist(key)
             elif(question.type == 'single_choice'):
-                answer = request.POST.getlist(key)
+                answer = request.POST.get(key)
             else:
                 answer = request.POST.get(key)
             answers[question.id] = answer # type: ignore
@@ -24,7 +24,9 @@ def QuizPage(request):
             if(value == []):
                 empty = True
         if( empty == False ):
-            
+            if(QuizResults.objects.filter(user=request.user).exists()):
+                QuizResults.objects.filter(user=request.user).delete()
+            QuizResults.objects.create(user=request.user, skin_type=answers[2], concerns=answers[4], eye_concern=answers[8], budget=answers[7], age=answers[3], preferences=answers[5], dryness=int(answers[9]))
             return redirect('/routines')
 
     question_ids = [question.id for question in questions] # type: ignore

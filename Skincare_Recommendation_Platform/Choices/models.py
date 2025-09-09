@@ -98,3 +98,9 @@ class QuestionTypeChoices(models.TextChoices):
     SINGLE_CHOICE = 'single_choice', 'Single Choice'
     MULTIPLE_CHOICE = 'multiple_choice', 'Multiple Choice'
     SLIDER = 'slider', 'Slider Scale'
+
+class EyeConcernChoices(models.TextChoices):
+    DARK_CIRCLES = 'dark_circles','Dark Circles'
+    FINE_LINES_AND_WRINKLES = 'fine_lines_and_wrinkles','Fine Lines & Wrinkles'
+    PUFFINESS = 'puffiness', 'Puffiness'
+    NO_EYE_CONCERNS = 'no_eye_concern', 'No Eye Concern'

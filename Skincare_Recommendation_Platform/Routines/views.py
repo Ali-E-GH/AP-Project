@@ -14,13 +14,13 @@ def routine_generator_view(request):
         return redirect('quiz_page')
 
     # استخراج داده‌ها از quiz_data
-    age = quiz_data.data.get('age')  # e.g., "20 to 30"
-    preferences = quiz_data.data.get('preferences', [])  # e.g., ["Vegan", "Fragrance-Free"]
-    skin_type = quiz_data.data.get('skin_type')  # e.g., "Dry"
-    concerns = quiz_data.data.get('concerns', [])  # max 3
-    budget = quiz_data.data.get('budget')  # e.g., "50$ to 70$"
-    eye_concern = quiz_data.data.get('eye_concern')  # e.g., "Dark Circles"
-    dryness_level = quiz_data.data.get('dryness')  # int from 0 to 10
+    age = quiz_data.age  # e.g., "20 to 30"
+    preferences = quiz_data.preferences  # e.g., ["Vegan", "Fragrance-Free"]
+    skin_type = quiz_data.skin_type  # e.g., "Dry"
+    concerns = quiz_data.concerns  # max 3
+    budget = quiz_data.budget  # e.g., "50$ to 70$"
+    eye_concern = quiz_data.eye_concern  # e.g., "Dark Circles"
+    dryness_level = quiz_data.dryness  # int from 0 to 10
 
     # تعیین نوع روتین پیشنهادی
     routine_name = 'minimalist'
