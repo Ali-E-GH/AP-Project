@@ -1,0 +1,37 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block title %}Routines{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'variables.css' %}">
+<link rel="stylesheet" href="{% static 'Routines/routine_page.css' %}">
+<script src="{% static 'Routines/routine_page.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <section>
+        {% for step in routine_steps %}
+            <div class="step_container">
+                <div class="order_container">
+                    <h1 class="order">
+                        {{ step.order }}
+                    </h1>
+                </div>
+                <div class="info_container">
+                    <h3 class="product_title">
+                        {{ step.product.name }}
+                    </h3>
+                    <p class="description">
+                        {{ step.description }}
+                    </p>
+                </div>
+                <a class="image_container" href="{% url 'product_page' step.product.id %}">
+                    <img src="{% static step.product.image_url %}" class="product_img">
+                </a>
+            </div>
+        {% endfor %}
+    </section>
+
+
+{% endblock %}

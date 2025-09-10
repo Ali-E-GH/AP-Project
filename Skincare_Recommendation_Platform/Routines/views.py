@@ -13,22 +13,20 @@ def routine_generator_view(request):
     except QuizResults.DoesNotExist:
         return redirect('quiz_page')
 
-    # استخراج داده‌ها از quiz_data
-    age = quiz_data.age  # S "Under 20","20 to 30","30 to 40","Over 40"
+    age = quiz_data.age
 
-    preferences = quiz_data.preferences  # M Vegan,Fragrance-Free,Cruelty-Free,Alcohol-Free,Non-Comedogenic
+    preferences = quiz_data.preferences 
 
-    skin_type = quiz_data.skin_type  # S Oily,Dry,Combination,Sensitive,Normal
+    skin_type = quiz_data.skin_type 
 
-    concerns = quiz_data.concerns  # M max 3 of Acne-Prone,Redness,"Dark Spots",Dullness,Hyperpigmentation,Oily/Blackheads,"Dryness & Dehydration","Early Signs of Aging","Mature Skin","Sensitive / Rosacea-prone"
+    concerns = quiz_data.concerns 
     
-    budget = quiz_data.budget  # S "Under 30$","30$ to 50$","50$ to 70$","Over 70$"
+    budget = quiz_data.budget 
     
-    eye_concern = quiz_data.eye_concern  # S "Drak Circles","Fine Lines & Wrinkles",Puffiness,"No Eye Concern"
+    eye_concern = quiz_data.eye_concern 
     
-    dryness_level = quiz_data.dryness  # int from 0 to 10
+    dryness_level = quiz_data.dryness 
 
-    # تعیین نوع روتین پیشنهادی
     routine_name = 'minimalist'
     if 'Dryness & Dehydration' in concerns or (skin_type == 'Dry' or dryness_level >= 7):
         routine_name = 'hydration'
@@ -39,10 +37,8 @@ def routine_generator_view(request):
     elif 'Early Signs of Aging' in concerns or 'Mature Skin' in concerns:
         routine_name = 'full'
 
-    # تعیین مراحل روتین
     steps = []
     step = 1
-    # مرحله پاک‌کننده
     if skin_type == 'Oily':
         steps.append({
             'order': step,
@@ -93,7 +89,6 @@ def routine_generator_view(request):
                 })
         step+=1
 
-    # سرم متناسب با concern
     concern_serums = {
         'Dark Spots': 'Vitamin C Serum',
         'Hyperpigmentation': 'Vitamin C Serum',
@@ -121,7 +116,6 @@ def routine_generator_view(request):
         })
     step+=1
 
-    # مرطوب‌کننده متناسب با سطح خشکی پوست
     if budget in ["50$ to 70$","Over 70$"]:
         moisturizer_name = 'Oil-Free Moisturizer' if skin_type == 'Oily' else ('Anti-Aging Moisturizer' if 'Aging' in ' '.join(concerns) else 'Glacier Cleanser')
         steps.append({
@@ -131,7 +125,6 @@ def routine_generator_view(request):
         })
         step+=1
 
-    # ضدآفتاب اجباری برای انواع پوست
     steps.append({
         'order': step,
         'description': 'Apply sunscreen with SPF 50 every morning',
@@ -139,7 +132,6 @@ def routine_generator_view(request):
     })
     step+=1
 
-    # کرم دور چشم در صورت نیاز
     if eye_concern != 'No Eye Concern':
         if budget in ["30$ to 50$","50$ to 70$"]:
             steps.append({
@@ -154,7 +146,6 @@ def routine_generator_view(request):
                 'product_name': f'Black Rice Bakuchiol Eye Cream'
             })
 
-    # ایجاد یا جایگزینی روتین در دیتابیس
     plan, _ = RoutinePlan.objects.get_or_create(user=user, name=routine_name)
     plan.routine_steps.all().delete()
 
@@ -171,4 +162,4 @@ def routine_generator_view(request):
             product=product
         )
 
-    return render(request, 'Routines/routine_page.html', {'routine_plan': plan})
+    return render(request, 'Routines/routine_page.html', {'routine_plan': plan, 'routine_steps': list(plan.routine_steps.all())})
