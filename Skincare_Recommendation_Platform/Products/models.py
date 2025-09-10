@@ -45,7 +45,10 @@ class Product(models.Model):
     )
     @property
     def rating(self):
-        return round(mean(self.ratings), 1)
+        if(self.ratings):
+            return round(mean(self.ratings), 1)
+        else:
+            return 0
     
     def save(self, *args, **kwargs):
         if(self.ratings):  # only if list is not empty

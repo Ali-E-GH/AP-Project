@@ -21,6 +21,7 @@ class RoutineStep(models.Model):
     order = models.PositiveIntegerField()
     description = models.TextField()
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.SET_NULL)
+    product_name = models.CharField(max_length=255, null=True)
 
     class Meta:
         ordering = ['order']

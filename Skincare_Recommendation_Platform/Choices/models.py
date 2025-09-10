@@ -28,11 +28,16 @@ class PreferenceChoices(models.TextChoices):
 
 class SkinConcernsChoices(models.TextChoices):
 
-    ACNE = "acne", "Acne"
+    ACNE_PRONE = "acne_prone", "Acne_Prone"
     REDNESS = "redness", "Redness"
-    DARK_SPOTS = "dark-spots", "Dark Spots"
-    AGING = "aging", "Aging"
+    DARK_SPOTS = "dark_spots", "Dark Spots"
+    AGING = "aging", "Early Signs of Aging"
     DULLNESS = "dullness", "Dullness"
+    HYPERPIGMENTATION = "hyperpigmentation", "Hyperpigmentation"
+    OILY_OR_BLACKHEADS = 'oily_or_blackheads', 'Oily/Blackheads'
+    DRYNESS = 'dryness', 'Dryness & Dehydration'
+    MATURE_SKIN = 'mature_skin', 'Mature Skin'
+    SENSITIVE = 'sensitive', 'Sensitive / Rosacea-prone'
 
 class DeviseChoices(models.TextChoices):
 
@@ -88,10 +93,10 @@ class LifeStyleChoices(models.TextChoices):
     ANTI_AGING = 'anti_aging', 'Focus on anti-aging'
 
 class BudgetChoices(models.TextChoices):
-    LOW = 'low', 'Under 25$'
-    MEDIUM = 'medium', '25$ to 100$'
-    HIGH = 'high', '100$ to 500$'
-    PREMIUM = 'premium', 'Over 500$'
+    LOW = 'low', 'Under 50$'
+    MEDIUM = 'medium', '50$ to 100$'
+    HIGH = 'high', '100$ to 250$'
+    PREMIUM = 'premium', 'Over 250$'
 
 class QuestionTypeChoices(models.TextChoices):
     TEXT = 'text', 'Text Answer'

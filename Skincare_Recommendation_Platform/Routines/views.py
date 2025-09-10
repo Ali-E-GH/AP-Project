@@ -50,11 +50,11 @@ def routine_generator_view(request):
         steps.append({
             'order': step,
             'description': 'Use a foaming cleanser to control oil',
-            'product_name': cleanser_name
+            'product_name': cleanser_name.name
         })
         step+=1
     elif skin_type == 'Dry':
-        if budget == 'Over 70$':
+        if budget == 'Over 250$':
             steps.append({
                 'order': step,
                 'description': 'Use a cream cleanser for hydration',
@@ -70,7 +70,7 @@ def routine_generator_view(request):
             steps.append({
                 'order': step,
                 'description': 'Use a cream cleanser for hydration',
-                'product_name': cleanser_name
+                'product_name': cleanser_name.name
             })
         step+=1
     else:
@@ -87,7 +87,7 @@ def routine_generator_view(request):
                 'product_name': 'Good Intent Glow Grind Cleansing Balm'
             })
         else:
-            if budget == 'Over 70$' and preferences in ['Vegan', 'Cruelty-Free']:
+            if budget == 'Over 250$' and preferences in ['Vegan', 'Cruelty-Free']:
                 steps.append({
                 'order': step,
                 'description': 'Use a good cleanser',
@@ -98,28 +98,33 @@ def routine_generator_view(request):
                 steps.append({
                     'order': step,
                     'description': 'Use a gentle daily cleanser',
-                    'product_name': 'Hydrating Cleanser'
+                    'product_name': 'Salicylic Acid Cleanser'
                 })
         step+=1
 
     concern_serums = {
-        'Dark Spots': 'Vitamin C Serum',
-        'Hyperpigmentation': 'Vitamin C Serum',
+        'Dark Spots': 'Glacier Foam',
+        'Hyperpigmentation': 'Black Rice Bakuchiol Eye Cream',
         'Dryness & Dehydration': 'Hyaluronic Acid Serum',
         'Acne-Prone': 'Niacinamide Serum',
-        'Early Signs of Aging': 'Retinol Serum',
-        'Dullness': 'Niacinamide Serum',
+        'Early Signs of Aging': 'Resurfacing Retinol Serum',
+        'Dullness': 'Hyaluronic Acid Serum',
+        'Oily/Blackheads': 'Niacinamide Serum',
+        'Redness': 'De-Bloat Soothing Eye Serum',
     }
     serum_added = False
+    serums_added = []
     for concern in concerns:
         if concern in concern_serums:
-            steps.append({
-                'order': step,
-                'description': f'Apply {concern_serums[concern]} to treat {concern.lower()}',
-                'product_name': concern_serums[concern]
-            })
-            serum_added = True
-            break
+            if(concern_serums[concern] not in serums_added):
+                steps.append({
+                    'order': step,
+                    'description': f'Apply {concern_serums[concern]} to treat {concern.lower()}',
+                    'product_name': concern_serums[concern]
+                })
+                serums_added.append(concern_serums[concern])
+                serum_added = True
+                step+=1
 
     if not serum_added:
         steps.append({
@@ -129,13 +134,13 @@ def routine_generator_view(request):
         })
     step+=1
 
-    if budget in ["50$ to 70$","Over 70$"]:
+    if budget in ["100$ to 250$","Over 250$"]:
         moisturizer_name = Product.objects.filter(
             compatible_skin_types=[skin_type],
             category='moisturizer',
         ).first()
         if not moisturizer_name:
-            moisturizer_name = 'Oil-Free Moisturizer' if skin_type == 'Oily' else ('Anti-Aging Moisturizer' if 'Aging' in ' '.join(concerns) else 'Glacier Cleanser')
+            moisturizer_name = 'Oil-Free Moisturizer' if skin_type == 'Oily' else ('Anti-Aging Moisturizer' if 'Aging' in ' '.join(concerns) else 'Gentle Cleanser')
         steps.append({
             'order': step,
             'description': 'Use a moisturizer to seal hydration',
@@ -151,13 +156,13 @@ def routine_generator_view(request):
     step+=1
 
     if eye_concern != 'No Eye Concern':
-        if budget in ["30$ to 50$","50$ to 70$"]:
+        if budget in ["50$ to 100$","100$ to 250$"]:
             steps.append({
                 'order': step,
                 'description': f'Use an eye cream for {eye_concern.lower()}',
                 'product_name': f'De-Bloat Soothing Eye Cream'
             })
-        elif budget == "Over 70$":
+        elif budget == "Over 250$":
             steps.append({
                 'order': step,
                 'description': f'Use an eye cream for {eye_concern.lower()}',
@@ -169,15 +174,22 @@ def routine_generator_view(request):
 
     for step in steps:
         try:
-            product = Product.objects.get(name=step['product_name'])
+            product = Product.objects.get(name__icontains=step['product_name'])
         except Product.DoesNotExist:
             product = None
-
-        RoutineStep.objects.create(
-            routine_plan=plan,
-            order=step['order'],
-            description=step['description'],
-            product=product
-        )
+        if product:
+            RoutineStep.objects.create(
+                routine_plan=plan,
+                order=step['order'],
+                description=step['description'],
+                product=product
+            )
+        else:
+            RoutineStep.objects.create(
+                routine_plan=plan,
+                order=step['order'],
+                description=step['description'],
+                product_name=step['product_name']
+            )
 
     return render(request, 'Routines/routine_page.html', {'routine_plan': plan, 'routine_steps': list(plan.routine_steps.all())})

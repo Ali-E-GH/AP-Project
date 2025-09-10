@@ -19,16 +19,28 @@
                     </h1>
                 </div>
                 <div class="info_container">
-                    <h3 class="product_title">
-                        {{ step.product.name }}
-                    </h3>
+                    {% if step.product %}
+                        <h3 class="product_title">
+                            {{ step.product.name }}
+                        </h3>
+                    {% else %}
+                        <h3 class="product_title">
+                            {{ step.product_name }}
+                        </h3>
+                    {% endif %}
                     <p class="description">
                         {{ step.description }}
                     </p>
                 </div>
-                <a class="image_container" href="{% url 'product_page' step.product.id %}">
-                    <img src="{% static step.product.image_url %}" class="product_img">
-                </a>
+                {% if step.product %}
+                    <a class="image_container" href="{% url 'product_page' step.product.id %}">
+                        <img src="{% static step.product.image_url %}" class="product_img">
+                    </a>
+                {% else %}
+                    <a href="" class="image_container">
+                        Not Available
+                    </a>
+                {% endif %}
             </div>
         {% endfor %}
     </section>

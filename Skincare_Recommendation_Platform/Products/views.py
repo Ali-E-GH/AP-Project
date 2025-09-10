@@ -50,13 +50,13 @@ def score_products(user, limit=10):
 
     scores = defaultdict(float)
 
-    quiz = QuizResults.objects.filter(user=user)
+    quiz = QuizResults.objects.filter(user=user).first()
     if(quiz):
         budget_ranges = {
-            "low": (0, 25),
-            "medium": (25, 100),
-            "high": (100, 500),
-            "premium": (500, 10000),
+            "low": (0, 50),
+            "medium": (50, 100),
+            "high": (100, 250),
+            "premium": (250, 10000),
         }
         min_price, max_price = budget_ranges.get(quiz.budget, (0, 10000))
 
