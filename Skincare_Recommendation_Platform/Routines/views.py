@@ -40,10 +40,17 @@ def routine_generator_view(request):
     steps = []
     step = 1
     if skin_type == 'Oily':
+        cleanser_name = Product.objects.filter(
+            compatible_skin_types=['oily'],
+            category='cleanser'
+        ).first()
+        if not cleanser_name:
+            cleanser_name =  'Salicylic Acid Cleanser'
+        
         steps.append({
             'order': step,
             'description': 'Use a foaming cleanser to control oil',
-            'product_name': 'Salicylic Acid Cleanser'
+            'product_name': cleanser_name
         })
         step+=1
     elif skin_type == 'Dry':
@@ -54,10 +61,16 @@ def routine_generator_view(request):
                 'product_name': 'Cream Cleanser'
             })
         else:
+            cleanser_name = Product.objects.filter(
+            compatible_skin_types=['dry'],
+            category='cleanser',
+            ).first()
+            if not cleanser_name:
+                cleanser_name = 'Simple Gentle'
             steps.append({
                 'order': step,
                 'description': 'Use a cream cleanser for hydration',
-                'product_name': 'Simple Gentle'
+                'product_name': cleanser_name
             })
         step+=1
     else:
@@ -117,7 +130,12 @@ def routine_generator_view(request):
     step+=1
 
     if budget in ["50$ to 70$","Over 70$"]:
-        moisturizer_name = 'Oil-Free Moisturizer' if skin_type == 'Oily' else ('Anti-Aging Moisturizer' if 'Aging' in ' '.join(concerns) else 'Glacier Cleanser')
+        moisturizer_name = Product.objects.filter(
+            compatible_skin_types=[skin_type],
+            category='moisturizer',
+        ).first()
+        if not moisturizer_name:
+            moisturizer_name = 'Oil-Free Moisturizer' if skin_type == 'Oily' else ('Anti-Aging Moisturizer' if 'Aging' in ' '.join(concerns) else 'Glacier Cleanser')
         steps.append({
             'order': step,
             'description': 'Use a moisturizer to seal hydration',
